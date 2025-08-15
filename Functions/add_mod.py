@@ -1,14 +1,7 @@
-from Utils.get_mcv_launchers import get_mcv_launchers
 from Utils.get_modpack_dir import get_modpack_dir
 from Utils.run_cmd import run_cmd
 
-def add_mod():
-    minecraft_versions, launchers = get_mcv_launchers()
-    if minecraft_versions or launchers is None:
-        return
-
-    mod_name = input("Enter the mod/resource pack/shader name: ")
-
+def add_mod(minecraft_versions, launchers, mod_name):
     for minecraft_version in minecraft_versions:
         for launcher in launchers:
             modpack_dir = get_modpack_dir(minecraft_version, launcher)

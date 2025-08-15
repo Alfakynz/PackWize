@@ -6,4 +6,5 @@ def run_cmd(cmd, cwd):
         subprocess.run(cmd, check=True, cwd=cwd)
     except subprocess.CalledProcessError as e:
         print(f"Error running {' '.join(cmd)} in {cwd}: {e}")
-        sys.exit(1)
+        # sys.exit(1)
+        return # continue the script
