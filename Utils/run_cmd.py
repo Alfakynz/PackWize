@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-def run_packwiz_cmd(cmd, cwd):
+def run_cmd(cmd, cwd):
     try:
         subprocess.run(cmd, check=True, cwd=cwd)
     except subprocess.CalledProcessError as e:

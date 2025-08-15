@@ -1,18 +1,13 @@
-from Utils.menu import menu
-from Utils.get_mc_version import get_mc_version
-from Utils.get_launcher import get_launcher
+from Utils.get_mcv_launchers import get_mcv_launchers
 from Utils.get_modpack_dir import get_modpack_dir
-from Utils.run_packwiz_cmd import run_packwiz_cmd
+from Utils.run_cmd import run_cmd
 import sys
 import os
 import shutil
 
 def export_modpack():
-    minecraft_versions = get_mc_version()
-    if minecraft_versions is None:
-        return
-    launchers = get_launcher()
-    if launchers is None:
+    minecraft_versions, launchers = get_mcv_launchers()
+    if minecraft_versions or launchers is None:
         return
 
     for minecraft_version in minecraft_versions:
@@ -53,5 +48,5 @@ def export_modpack():
                     sys.exit(1)
 
             # Run the two necessary commands
-            run_packwiz_cmd(['packwiz', 'refresh'], modpack_dir)
-            run_packwiz_cmd(['packwiz', launcher.lower(), 'export'], modpack_dir)
+            run_cmd(['packwiz', 'refresh'], modpack_dir)
+            run_cmd(['packwiz', launcher.lower(), 'export'], modpack_dir)

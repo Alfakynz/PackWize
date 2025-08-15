@@ -1,14 +1,9 @@
-from Utils.get_mc_version import get_mc_version
-from Utils.get_launcher import get_launcher
+from Utils.get_mcv_launchers import get_mcv_launchers
 import os
 
 def update_modpack_version():
-    minecraft_versions = get_mc_version()
-    if minecraft_versions is None:
-        return
-    
-    launchers = get_launcher()
-    if launchers is None:
+    minecraft_versions, launchers = get_mcv_launchers()
+    if minecraft_versions or launchers is None:
         return
 
     pack_toml_paths = []

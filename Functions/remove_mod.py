@@ -1,16 +1,10 @@
-from Utils.menu import menu
-from Utils.get_mc_version import get_mc_version
-from Utils.get_launcher import get_launcher
-from Utils.run_packwiz_cmd import run_packwiz_cmd
+from Utils.get_mcv_launchers import get_mcv_launchers
+from Utils.run_cmd import run_cmd
 import os
 
 def remove_mod():
-    minecraft_versions = get_mc_version()
-    if minecraft_versions is None:
-        return
-
-    launchers = get_launcher()
-    if launchers is None:
+    minecraft_versions, launchers = get_mcv_launchers()
+    if minecraft_versions or launchers is None:
         return
 
     mod_name = input("Enter the mod/resource pack/shader name: ")
@@ -22,4 +16,4 @@ def remove_mod():
                 print(f"Directory {modpack_dir} does not exist.")
                 continue
 
-            run_packwiz_cmd(['packwiz', 'remove', mod_name], modpack_dir)
+            run_cmd(['packwiz', 'remove', mod_name], modpack_dir)

@@ -1,11 +1,11 @@
 from Utils.menu import menu
-from add_mod import add_mod
-from remove_mod import remove_mod
-from update_mods import update_mods
-from build_pack_content import build_pack_content
-from export_modpack import export_modpack
-from update_modpack_version import update_modpack_version
-from refresh_modpack import refresh_modpack
+from Functions.add_mod import add_mod
+from Functions.remove_mod import remove_mod
+from Functions.update_mods import update_mods
+from Functions.build_pack_content import build_pack_content
+from Functions.export_modpack import export_modpack
+from Functions.update_modpack_version import update_modpack_version
+from Functions.refresh_modpack import refresh_modpack
 
 def main():
     select = menu(["Add mod", "Remove mod", "Update mods", "Export modpack", "Build pack content", "Update modpack version", "Refresh modpack"], "What do you want to do?")

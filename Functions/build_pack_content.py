@@ -1,13 +1,13 @@
 from pathlib import Path
 import tomllib
 from Utils.menu import menu
-from Utils.get_mc_version import get_mc_version
+from Utils.get_mcv_launchers import get_mcv_launchers
 
 OUTPUT_FILE = "PACK_CONTENT.md"
 
 def build_pack_content():
-    minecraft_versions = get_mc_version()
-    if minecraft_versions is None:
+    minecraft_versions, launchers = get_mcv_launchers()
+    if minecraft_versions or launchers is None:
         return
 
     types = [
