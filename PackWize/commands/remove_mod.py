@@ -1,4 +1,4 @@
-from utils.run_cmd import run_cmd
+from PackWize.utils.run_cmd import run_cmd
 import os
 
 def remove_mod(minecraft_versions, launchers, mod_name):

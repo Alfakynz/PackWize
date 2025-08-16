@@ -9,6 +9,10 @@ description = "A CLI/TUI to manage modpacks easier than just using Packwiz. Base
 authors = [{name="Alfakynz"}]
 license = {text = "MIT"}
 
+dependencies = [
+    "windows-curses; platform_system == 'Windows'",
+]
+
 [tool.setuptools.packages.find]
 include = ["PackWize", "PackWize.commands", "PackWize.utils"]
 

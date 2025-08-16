@@ -1,4 +1,4 @@
-from utils.get_mcv_launchers import get_mcv_launchers
+from PackWize.utils.get_mcv_launchers import get_mcv_launchers
 import os
 
 def update_modpack_version(minecraft_versions, launchers):

@@ -1,4 +1,4 @@
-from utils.menu import menu
+from PackWize.utils.menu import menu
 from pathlib import Path
 
 def get_launcher(all = True):
