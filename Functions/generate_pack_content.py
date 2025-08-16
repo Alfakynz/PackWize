@@ -3,7 +3,7 @@ import tomllib
 
 OUTPUT_FILE = "PACK_CONTENT.md"
 
-def build_pack_content(minecraft_versions, launchers):
+def generate_pack_content(minecraft_versions, launchers):
     types = [
         ("mods", "Mods"),
         ("resourcepacks", "Resource packs"),

@@ -46,21 +46,20 @@ def update_modpack_version(minecraft_versions, launchers):
         return
 
     # Update the version line in both pack.toml files if they exist
-    for minecraft_version in minecraft_versions:
-        for launcher, pack_toml_path in pack_toml_paths:
-            if not os.path.isfile(pack_toml_path):
-                continue
-            with open(pack_toml_path, "r", encoding="utf-8") as f:
-                lines = f.readlines()
-            version_line_idx = None
-            for idx, line in enumerate(lines):
-                if line.strip().startswith("version ="):
-                    version_line_idx = idx
-                    break
-            if version_line_idx is not None:
-                lines[version_line_idx] = f'version = "{new_version}"\n'
-                with open(pack_toml_path, "w", encoding="utf-8") as f:
-                    f.writelines(lines)
+    for launcher, pack_toml_path in pack_toml_paths:
+        if not os.path.isfile(pack_toml_path):
+            continue
+        with open(pack_toml_path, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+        version_line_idx = None
+        for idx, line in enumerate(lines):
+            if line.strip().startswith("version ="):
+                version_line_idx = idx
+                break
+        if version_line_idx is not None:
+            lines[version_line_idx] = f'version = "{new_version}"\n'
+            with open(pack_toml_path, "w", encoding="utf-8") as f:
+                f.writelines(lines)
                 print(f"Modpack version updated to {new_version} in {pack_toml_path}")
-            else:
-                print(f"No version line found in {pack_toml_path}, skipping.")
+        else:
+            print(f"No version line found in {pack_toml_path}, skipping.")

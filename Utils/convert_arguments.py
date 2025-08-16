@@ -1,0 +1,30 @@
+from pathlib import Path
+
+def convert_arguments(argument, value):
+    match argument:
+        case "minecraft_version":
+            match value:
+                case "all":
+                    directories = sorted([
+                        d.name
+                        for d in Path().iterdir()
+                        if d.is_dir()
+                        and not d.name.startswith('.')
+                        and any(c.isdigit() for c in d.name)
+                    ])
+
+                    return directories
+                case _:
+                    return [value]
+        
+        case "launcher":
+            match value.lower():
+                case "all":
+                    return ["CurseForge", "Modrinth"]
+                case "modrinth" | "mr":
+                    return ["Modrinth"]
+                case "curseforge" | "cf":
+                    return ["CurseForge"]
+
+        case _:
+            return
