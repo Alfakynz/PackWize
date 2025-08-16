@@ -9,7 +9,14 @@
     ".gitattributes": true,
     "LICENSE": true,
     ".vscode": true,
-    ".gitignore": true
+    ".gitignore": true,
+    "build": true
   },
-  "hide-files.files": [".gitattributes", "LICENSE", ".vscode", ".gitignore"]
+  "hide-files.files": [
+    ".gitattributes",
+    "LICENSE",
+    ".vscode",
+    ".gitignore",
+    "build"
+  ]
 }
