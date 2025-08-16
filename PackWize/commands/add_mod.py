@@ -1,5 +1,5 @@
-from Utils.get_modpack_dir import get_modpack_dir
-from Utils.run_cmd import run_cmd
+from utils.get_modpack_dir import get_modpack_dir
+from utils.run_cmd import run_cmd
 
 def add_mod(minecraft_versions, launchers, mod_name):
     for minecraft_version in minecraft_versions:

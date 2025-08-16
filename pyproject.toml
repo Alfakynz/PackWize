@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "packwize"
+version = "0.0.1"
+description = "A CLI/TUI to manage modpacks easier than just using Packwiz. Based on Packwiz"
+authors = [{name="Alfakynz"}]
+license = {text = "MIT"}
+
+[tool.setuptools.packages.find]
+include = ["PackWize", "PackWize.commands", "PackWize.utils"]
+
+[project.scripts]
+packwize = "PackWize.main:main"

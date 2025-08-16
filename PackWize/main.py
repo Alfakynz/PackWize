@@ -1,19 +1,19 @@
 import argparse
-from Utils.menu import menu
-from Utils.get_mcv_launchers import get_mcv_launchers
-from Utils.convert_arguments import convert_arguments
-from Functions.add_mod import add_mod
-from Functions.remove_mod import remove_mod
-from Functions.update_mods import update_mods
-from Functions.export_modpack import export_modpack
-from Functions.generate_pack_content import generate_pack_content
-from Functions.update_modpack_version import update_modpack_version
-from Functions.refresh_modpack import refresh_modpack
+from PackWize.utils.menu import menu
+from PackWize.utils.get_mcv_launchers import get_mcv_launchers
+from PackWize.utils.convert_arguments import convert_arguments
+from PackWize.commands.add_mod import add_mod
+from PackWize.commands.remove_mod import remove_mod
+from PackWize.commands.update_mods import update_mods
+from PackWize.commands.export_modpack import export_modpack
+from PackWize.commands.generate_pack_content import generate_pack_content
+from PackWize.commands.update_modpack_version import update_modpack_version
+from PackWize.commands.refresh_modpack import refresh_modpack
 
 # CLI function
 def main():
     parser = argparse.ArgumentParser(prog="packwize", description="A CLI/TUI to manage modpack easier than just use Packwiz. Based on Packwiz")
-    parser.add_argument("-v", "--version", action="version", version="Packwize 0.0.1", help="Show the version of Packwize")
+    parser.add_argument("-v", "--version", action="version", version="Packwize 0.0.1", help="Show the version of PackWize")
 
     subparsers = parser.add_subparsers(dest="command", required=False, help="Available commands")
 

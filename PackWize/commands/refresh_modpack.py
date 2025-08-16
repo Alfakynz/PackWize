@@ -1,5 +1,5 @@
-from Utils.get_modpack_dir import get_modpack_dir
-from Utils.run_cmd import run_cmd
+from utils.get_modpack_dir import get_modpack_dir
+from utils.run_cmd import run_cmd
 
 def refresh_modpack(minecraft_versions, launchers):
     for minecraft_version in minecraft_versions:

@@ -1,5 +1,5 @@
-from Utils.get_modpack_dir import get_modpack_dir
-from Utils.run_cmd import run_cmd
+from utils.get_modpack_dir import get_modpack_dir
+from utils.run_cmd import run_cmd
 import sys
 import os
 import shutil

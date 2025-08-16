@@ -1,5 +1,5 @@
-from Utils.get_mc_version import get_mc_version
-from Utils.get_launcher import get_launcher
+from utils.get_mc_version import get_mc_version
+from utils.get_launcher import get_launcher
 
 def get_mcv_launchers():
     minecraft_versions = get_mc_version()

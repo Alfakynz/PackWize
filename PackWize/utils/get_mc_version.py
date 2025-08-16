@@ -1,4 +1,4 @@
-from Utils.menu import menu
+from utils.menu import menu
 from pathlib import Path
 
 def get_mc_version(all = True):
