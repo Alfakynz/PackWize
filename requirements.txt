@@ -1,2 +1,2 @@
-# windows-curses uniquement sous Windows
+# windows-curses only on Windows
 windows-curses; platform_system == "Windows"
