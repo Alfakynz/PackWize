@@ -11,7 +11,7 @@ Run packwiz commands for all Minecraft versions and launchers you want at the sa
 - Export the modpack's content list to an MD file
 - Refresh the pack.toml and index.toml files
 
-All of these functions can be run for one Minecraft version in one launcher or for all Minecraft versions in all launchers
+All of these functions can be run for one Minecraft version in one launcher or for all Minecraft versions in all launchers.
 
 ## 🌲 Modpack tree example
 
@@ -36,6 +36,9 @@ All of these functions can be run for one Minecraft version in one launcher or f
 ## 📦 Installation
 
 ### 👤 For users
+
+- Linux/macOS: `curl -fsSL https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.sh | bash`
+- Windows: `irm https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.ps1 | iex`
 
 ### 👨‍💻 For devs
 
