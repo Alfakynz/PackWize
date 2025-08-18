@@ -67,5 +67,11 @@ if ($envPath -notlike "*$InstallDir*") {
     )
 }
 
+# Dependency check
+if (-not (Get-Command "packwiz.exe" -ErrorAction SilentlyContinue)) {
+    Write-Host "Error: packwiz is not installed or not in PATH." -ForegroundColor Red
+    Write-Host "You can install it here: https://packwiz.infra.link/installation/"
+}
+
 Write-Host "Installation complete!"
 Write-Host "Open a new terminal and run: packwize --help"

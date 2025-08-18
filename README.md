@@ -33,6 +33,11 @@ All of these functions can be run for one Minecraft version in one launcher or f
 ┣ configurations <br />
 ┗ PACK_CONTENT.md <br />
 
+## ⚙️ Requirements
+
+- [Packwiz](https://packwiz.infra.link/)
+- [Python 3.13.5 (or higher)](https://python.org) (for devs)
+
 ## 📦 Installation
 
 ### 👤 For users
@@ -48,10 +53,16 @@ All of these functions can be run for one Minecraft version in one launcher or f
 - `pip install pyinstaller` (optional)
 - `pip install .` or `pyinstaller --onefile PackWize/main.py packwize` (if you've installed PyInstaller)
 
-## ⚙️ Requirements
+## ❌ Uninstallation
 
-- [Packwiz](https://packwiz.infra.link/)
-- [Python 3.13 (or higher)](https://python.org) (for devs)
+### 👤 For users
+
+- Linux/macos: `curl -fsSL https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.sh | bash -s uninstall`
+- Windows: `iex "& { $(irm https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.ps1) } -Uninstall"`
+
+### 👨‍💻 For devs
+
+- `pip uninstall packwize`
 
 ## 🤝 Contributing
 

@@ -10,10 +10,12 @@ from PackWize.commands.generate_pack_content import generate_pack_content
 from PackWize.commands.update_modpack_version import update_modpack_version
 from PackWize.commands.refresh_modpack import refresh_modpack
 
+VERSION="1.0.0"
+
 # CLI function
 def main():
     parser = argparse.ArgumentParser(prog="packwize", description="A CLI/TUI to manage modpack easier than just use Packwiz. Based on Packwiz")
-    parser.add_argument("-v", "--version", action="version", version="Packwize 0.0.1", help="Show the version of PackWize")
+    parser.add_argument("-v", "--version", action="version", version=f"Packwize {VERSION}", help="Show the version of PackWize")
 
     subparsers = parser.add_subparsers(dest="command", required=False, help="Available commands")
 

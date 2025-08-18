@@ -5,6 +5,10 @@ REPO="Alfakynz/PackWize"
 INSTALL_DIR="$HOME/.local/bin"
 BINARY="$INSTALL_DIR/packwize"
 
+# Color codes for output
+RED="\033[0;31m"
+RESET="\033[0m"
+
 if [ "${1:-}" = "uninstall" ]; then
   echo "Uninstalling Packwize..."
   if [ -f "$BINARY" ]; then
@@ -45,6 +49,11 @@ echo "Installing to $INSTALL_DIR"
 mkdir -p "$INSTALL_DIR"
 mv -f "/tmp/packwize/packwize" "$BINARY"
 chmod +x "$BINARY"
+
+if ! command -v packwiz >/dev/null 2>&1; then
+  echo -e "${RED}Error: packwiz is not installed or not in PATH.${RESET}"
+  echo "You can install it here: https://packwiz.infra.link/installation/"
+fi
 
 echo "Installation complete!"
 echo "Make sure $INSTALL_DIR is in your PATH"
