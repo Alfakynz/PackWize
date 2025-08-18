@@ -9,8 +9,9 @@ from PackWize.commands.export_modpack import export_modpack
 from PackWize.commands.generate_pack_content import generate_pack_content
 from PackWize.commands.update_modpack_version import update_modpack_version
 from PackWize.commands.refresh_modpack import refresh_modpack
+from PackWize.commands.init_modpack import init_modpack
 
-VERSION="1.0.0"
+VERSION="1.1.0"
 
 # CLI function
 def main():
@@ -39,13 +40,19 @@ def main():
 
     # Generate modpack content list
     parser_generate = subparsers.add_parser("generate", aliases=["gen"], help="Export the modpack's content list to an MD file. Find the file in the {Minecraft version} directory")
+
     # Update modpack version
     parser_update_version = subparsers.add_parser("update-version", aliases=["uv", "set-version", "change-version"], help="Update the modpack version (not the Minecraft version)")
+
     # Refresh modpack
     parser_refresh = subparsers.add_parser("refresh", aliases=["rf"], help="Refresh the pack.toml and index.toml files")
 
+    # Init modpack
+    parser_init = subparsers.add_parser("init", help="Initialize a new modpack and create directories")
+
     commands = [parser_add, parser_remove, parser_update, parser_export, parser_generate, parser_update_version, parser_refresh]
-    
+
+    # Add common arguments to all commands    
     for command in commands:
         command.add_argument("minecraft_version", help="Minecraft version to work in. Use 'all' to select all Minecraft versions")
         command.add_argument("launcher", help="Launcher to work in. Use 'all' to select all launchers")
@@ -78,50 +85,52 @@ def main():
         case "refresh" | "rf":
             refresh_modpack(minecraft_version, launcher)
 
+        case "init":
+            init_modpack()
+
         case "tui" | _:
             selection()
 
 # TUI function
 def selection():
-    select = menu(["Add mod", "Remove mod", "Update mods", "Export modpack", "Generate pack content", "Update modpack version", "Refresh modpack"], "What do you want to do?")
+    select = menu(["Add mod", "Remove mod", "Update mods", "Export modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Init modpack"], "What do you want to do?")
 
     if not select:
         return
 
-    minecraft_versions, launchers = get_mcv_launchers()
+    if select != "Init modpack":
+        minecraft_versions, launchers = get_mcv_launchers()
+    else:
+        minecraft_versions, launchers = [], []
 
-    if not minecraft_versions or not launchers:
+    if (not minecraft_versions or not launchers) and not (select == "Init modpack" and not minecraft_versions and not launchers):
         main()
     else:
         match select:
             case "Add mod":
                 mod_name = input("Enter the mod/resource pack/shader name: ")
                 add_mod(minecraft_versions, launchers, mod_name)
-                main()
             case "Remove mod":
                 mod_name = input("Enter the mod/resource pack/shader name: ")
                 remove_mod(minecraft_versions, launchers, mod_name)
-                main()
             case "Update mods":
                 mod_name = input("Enter the mod/resource pack/shader name (--all to update all): ")
                 update_mods(minecraft_versions, launchers, mod_name)
-                main()
             case "Export modpack":
                 export_modpack(minecraft_versions, launchers)
-                main()
             case "Generate pack content":
                 generate_pack_content(minecraft_versions, launchers)
-                main()
             case "Update modpack version":
                 update_modpack_version(minecraft_versions, launchers)
-                main()
             case "Refresh modpack":
                 refresh_modpack(minecraft_versions, launchers)
-                main()
+            case "Init modpack":
+                init_modpack()
             case None:
                 return
             case _:
                 print("Invalid selection")
+        main()
 
 if __name__ == "__main__":
     try:

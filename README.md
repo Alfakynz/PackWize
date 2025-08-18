@@ -10,6 +10,7 @@ Run packwiz commands for all Minecraft versions and launchers you want at the sa
 - Export the modpack contents to a ZIP or MRPACK file
 - Export the modpack's content list to an MD file
 - Refresh the pack.toml and index.toml files
+- Initialize a new modpack and create directories
 
 All of these functions can be run for one Minecraft version in one launcher or for all Minecraft versions in all launchers.
 
