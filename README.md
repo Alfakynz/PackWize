@@ -21,6 +21,7 @@ All of these functions can be run for one Minecraft version in one launcher or f
 ┃ ┣ mods <br />
 ┃ ┃ ┣ fabric-api.pw.toml <br />
 ┃ ┃ ┣ modmenu.pw.toml <br />
+┃ ┃ ┣ sodium.pw.toml <br />
 ┃ ┃ ┗ text-placeholder-api.pw.toml <br />
 ┃ ┣ index.toml <br />
 ┃ ┗ pack.toml <br />
@@ -28,10 +29,16 @@ All of these functions can be run for one Minecraft version in one launcher or f
 ┃ ┣ mods <br />
 ┃ ┃ ┣ fabric-api.pw.toml <br />
 ┃ ┃ ┣ modmenu.pw.toml <br />
-┃ ┃ ┗ placeholder-api.pw.toml <br />
+┃ ┃ ┣ placeholder-api.pw.toml <br />
+┃ ┃ ┗ sodium.pw.toml <br />
 ┃ ┣ index.toml <br />
 ┃ ┗ pack.toml <br />
 ┣ configurations <br />
+┃ ┣ config <br />
+┃ ┃ ┗ sodium-options.json <br />
+┃ ┣ .packwizignore <br />
+┃ ┣ icon.png <br />
+┃ ┗ options.txt <br />
 ┗ PACK_CONTENT.md <br />
 
 ## ⚙️ Requirements
