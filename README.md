@@ -1,5 +1,10 @@
 # PackWize
 
+This CLI/TUI was created to manage modpacks more easily than just using [Packwiz](https://packwiz.infra.link/). <br />
+Run Packwiz commands across multiple directories at the same time. <br />
+Easily create modpacks by placing you config file into a configuration directory, it will be copied into your modpack directory when exporting it. <br />
+Made for creators who maintain multiple versions of a modpack.
+
 ## ✨ Features
 
 Run packwiz commands for all Minecraft versions and launchers you want at the same time. Supports most packwiz commands.
