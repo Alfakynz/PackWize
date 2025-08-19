@@ -5,57 +5,63 @@ from PackWize.utils.convert_arguments import convert_arguments
 from PackWize.commands.add_mod import add_mod
 from PackWize.commands.remove_mod import remove_mod
 from PackWize.commands.update_mods import update_mods
+from PackWize.commands.accept_version import accept_version
 from PackWize.commands.export_modpack import export_modpack
 from PackWize.commands.generate_pack_content import generate_pack_content
 from PackWize.commands.update_modpack_version import update_modpack_version
 from PackWize.commands.refresh_modpack import refresh_modpack
 from PackWize.commands.init_modpack import init_modpack
 
-VERSION="1.1.0"
+VERSION="1.2.0"
 
 # CLI function
 def main():
-    parser = argparse.ArgumentParser(prog="packwize", description="A CLI/TUI to manage modpack easier than just use Packwiz. Based on Packwiz")
+    parser = argparse.ArgumentParser(
+        prog="packwize",
+        description="A CLI/TUI to manage modpack easier than just using Packwiz. Based on Packwiz"
+    )
     parser.add_argument("-v", "--version", action="version", version=f"Packwize {VERSION}", help="Show the version of PackWize")
 
     subparsers = parser.add_subparsers(dest="command", required=False, help="Available commands")
+
+    # Parent parser for common arguments
+    common_parser = argparse.ArgumentParser(add_help=False)
+    common_parser.add_argument("minecraft_version", help="Minecraft version to work in. Use 'all' to select all Minecraft versions")
+    common_parser.add_argument("launcher", help="Launcher to work in. Use 'all' to select all launchers")
 
     # TUI menu
     parser_tui = subparsers.add_parser("tui", help="Show TUI menu")
 
     # Add mods
-    parser_add = subparsers.add_parser("add", aliases=["install", "i"], help="Add a mod to the modpack")
+    parser_add = subparsers.add_parser("add", aliases=["install", "i"], parents=[common_parser], help="Add a mod to the modpack")
     parser_add.add_argument("mod", help="Mod/resource pack/shaderpack you want to add")
 
     # Remove mods
-    parser_remove = subparsers.add_parser("remove", aliases=["rm", "uninstall"], help="Remove a mod from the modpack")
+    parser_remove = subparsers.add_parser("remove", aliases=["rm", "uninstall"], parents=[common_parser], help="Remove a mod from the modpack")
     parser_remove.add_argument("mod", help="Mod/resource pack/shaderpack you want to remove")
 
     # Update mods
-    parser_update = subparsers.add_parser("update", aliases=["upgrade"], help="Update mod in the modpack")
+    parser_update = subparsers.add_parser("update", aliases=["upgrade"], parents=[common_parser], help="Update mod in the modpack")
     parser_update.add_argument("mod", help="Mod/resource pack/shaderpack you want to update. Use '--all' to update all)")
 
+    # Accept version
+    parser_accept_version = subparsers.add_parser("accept-version", aliases=["av"], parents=[common_parser], help="Accept a specific version for the modpack")
+    parser_accept_version.add_argument("version", help="Version to accept")
+
     # Export modpack
-    parser_export = subparsers.add_parser("export", aliases=["build"], help="Export the modpack content to a ZIP or MRPACK file. Find the file in the {Minecraft version}/{launcher} directory")
+    parser_export = subparsers.add_parser("export", aliases=["build"], parents=[common_parser], help="Export the modpack content to a ZIP or MRPACK file. Find the file in the {Minecraft version}/{launcher} directory")
 
     # Generate modpack content list
-    parser_generate = subparsers.add_parser("generate", aliases=["gen"], help="Export the modpack's content list to an MD file. Find the file in the {Minecraft version} directory")
+    parser_generate = subparsers.add_parser("generate", aliases=["gen"], parents=[common_parser], help="Export the modpack's content list to an MD file. Find the file in the {Minecraft version} directory")
 
     # Update modpack version
-    parser_update_version = subparsers.add_parser("update-version", aliases=["uv", "set-version", "change-version"], help="Update the modpack version (not the Minecraft version)")
+    parser_update_version = subparsers.add_parser("update-version", aliases=["uv", "set-version", "change-version"], parents=[common_parser], help="Update the modpack version (not the Minecraft version)")
 
     # Refresh modpack
-    parser_refresh = subparsers.add_parser("refresh", aliases=["rf"], help="Refresh the pack.toml and index.toml files")
+    parser_refresh = subparsers.add_parser("refresh", aliases=["rf"], parents=[common_parser], help="Refresh the pack.toml and index.toml files")
 
     # Init modpack
     parser_init = subparsers.add_parser("init", help="Initialize a new modpack and create directories")
-
-    commands = [parser_add, parser_remove, parser_update, parser_export, parser_generate, parser_update_version, parser_refresh]
-
-    # Add common arguments to all commands    
-    for command in commands:
-        command.add_argument("minecraft_version", help="Minecraft version to work in. Use 'all' to select all Minecraft versions")
-        command.add_argument("launcher", help="Launcher to work in. Use 'all' to select all launchers")
 
     args = parser.parse_args()
 
@@ -72,6 +78,9 @@ def main():
 
         case "update" | "upgrade":
             update_mods(minecraft_version, launcher, args.mod)
+
+        case "accept-version" | "av":
+            accept_version(minecraft_version, launcher, args.version)
 
         case "export" | "build":
             export_modpack(minecraft_version, launcher)
@@ -93,7 +102,7 @@ def main():
 
 # TUI function
 def selection():
-    select = menu(["Add mod", "Remove mod", "Update mods", "Export modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Init modpack"], "What do you want to do?")
+    select = menu(["Add mod", "Remove mod", "Update mods", "Accept version", "Export modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Init modpack"], "What do you want to do?")
 
     if not select:
         return
@@ -116,6 +125,9 @@ def selection():
             case "Update mods":
                 mod_name = input("Enter the mod/resource pack/shader name (--all to update all): ")
                 update_mods(minecraft_versions, launchers, mod_name)
+            case "Accept version":
+                version = input("Enter the version to accept: ")
+                accept_version(minecraft_versions, launchers, version)
             case "Export modpack":
                 export_modpack(minecraft_versions, launchers)
             case "Generate pack content":

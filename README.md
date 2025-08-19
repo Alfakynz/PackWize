@@ -85,3 +85,14 @@ If you'd like to contribute:
 
 - Open an issue to suggest an idea, report a bug, or discuss a change
 - Submit a pull request if you have an improvement to propose
+
+## To Do
+
+- Support for other Packwiz commands
+  - `packwiz settings acceptable-versions` ✅
+  - `packwiz list`
+  - `packwiz migrate`
+  - `packwiz pin`
+  - `packwiz unpin`
+  - `packwiz url add`
+- Documentation
