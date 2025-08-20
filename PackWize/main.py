@@ -2,6 +2,7 @@ import argparse
 from PackWize.utils.menu import menu
 from PackWize.utils.get_mcv_launchers import get_mcv_launchers
 from PackWize.utils.convert_arguments import convert_arguments
+from PackWize.utils.better_input import better_input
 from PackWize.commands.add_mod import add_mod
 from PackWize.commands.remove_mod import remove_mod
 from PackWize.commands.update_mods import update_mods
@@ -140,22 +141,22 @@ def selection():
     else:
         match select:
             case "Add mod":
-                mod_name = input("Enter the mod/resource pack/shader name: ")
+                mod_name = better_input("Enter the mod/resource pack/shader name: ")
                 add_mod(minecraft_versions, launchers, mod_name)
             case "Remove mod":
-                mod_name = input("Enter the mod/resource pack/shader name: ")
+                mod_name = better_input("Enter the mod/resource pack/shader name: ")
                 remove_mod(minecraft_versions, launchers, mod_name)
             case "Update mods":
-                mod_name = input("Enter the mod/resource pack/shader name (--all to update all): ")
+                mod_name = better_input("Enter the mod/resource pack/shader name (--all to update all): ", default="--all")
                 update_mods(minecraft_versions, launchers, mod_name)
             case "Pin mod":
-                mod_name = input("Enter the mod/resource pack/shader name: ")
+                mod_name = better_input("Enter the mod/resource pack/shader name: ")
                 pin_mod(minecraft_versions, launchers, mod_name)
             case "Unpin mod":
-                mod_name = input("Enter the mod/resource pack/shader name: ")
+                mod_name = better_input("Enter the mod/resource pack/shader name: ")
                 unpin_mod(minecraft_versions, launchers, mod_name)
             case "Accept version":
-                version = input("Enter the version to accept: ")
+                version = better_input("Enter the version to accept: ")
                 accept_version(minecraft_versions, launchers, version)
             case "Export modpack":
                 export_modpack(minecraft_versions, launchers)
