@@ -92,7 +92,7 @@ If you'd like to contribute:
   - `packwiz settings acceptable-versions` ✅
   - `packwiz list` ✅
   - `packwiz migrate`
-  - `packwiz pin`
-  - `packwiz unpin`
+  - `packwiz pin` ✅
+  - `packwiz unpin` ✅
   - `packwiz url add`
 - Documentation

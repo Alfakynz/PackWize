@@ -5,6 +5,8 @@ from PackWize.utils.convert_arguments import convert_arguments
 from PackWize.commands.add_mod import add_mod
 from PackWize.commands.remove_mod import remove_mod
 from PackWize.commands.update_mods import update_mods
+from PackWize.commands.pin_mod import pin_mod
+from PackWize.commands.unpin_mod import unpin_mod
 from PackWize.commands.accept_version import accept_version
 from PackWize.commands.export_modpack import export_modpack
 from PackWize.commands.list_modpack import list_modpack
@@ -13,7 +15,7 @@ from PackWize.commands.update_modpack_version import update_modpack_version
 from PackWize.commands.refresh_modpack import refresh_modpack
 from PackWize.commands.init_modpack import init_modpack
 
-VERSION="1.3.0"
+VERSION="1.4.0"
 
 # CLI function
 def main():
@@ -45,12 +47,20 @@ def main():
     parser_update = subparsers.add_parser("update", aliases=["upgrade"], parents=[common_parser], help="Update mod in the modpack")
     parser_update.add_argument("mod", help="Mod/resource pack/shaderpack you want to update. Use '--all' to update all)")
 
+    # Pin mod
+    parser_pin = subparsers.add_parser("pin", aliases=["hold"], parents=[common_parser], help="Pin a mod in the modpack to prevent it from being updated automatically")
+    parser_pin.add_argument("mod", help="Mod/resource pack/shaderpack you want to pin.")
+
+    # Unin mod
+    parser_unpin = subparsers.add_parser("unpin", aliases=["unhold"], parents=[common_parser], help="Unpin a mod in the modpack to allow it to be updated automatically")
+    parser_unpin.add_argument("mod", help="Mod/resource pack/shaderpack you want to unpin.")
+
     # Accept version
     parser_accept_version = subparsers.add_parser("accept-version", aliases=["av"], parents=[common_parser], help="Accept a specific version for the modpack")
     parser_accept_version.add_argument("version", help="Version to accept")
 
     # Export modpack
-    parser_export = subparsers.add_parser("export", aliases=["build"], parents=[common_parser], help="Export the modpack content to a ZIP or MRPACK file. Find the file in the {Minecraft version}/{launcher} directory")
+    parser_export = subparsers.add_parser("export", aliases=["ex", "build"], parents=[common_parser], help="Export the modpack content to a ZIP or MRPACK file. Find the file in the {Minecraft version}/{launcher} directory")
 
     # List modpack
     parser_list = subparsers.add_parser("list", aliases=["ls"], parents=[common_parser], help="List mods, resource packs and shaders in the modpack")
@@ -59,7 +69,7 @@ def main():
     parser_generate = subparsers.add_parser("generate", aliases=["gen"], parents=[common_parser], help="Export the modpack's content list to an MD file. Find the file in the {Minecraft version} directory")
 
     # Update modpack version
-    parser_update_version = subparsers.add_parser("update-version", aliases=["uv", "set-version", "change-version"], parents=[common_parser], help="Update the modpack version (not the Minecraft version)")
+    parser_update_version = subparsers.add_parser("update-version", aliases=["uv", "set-version", "sv", "change-version", "cv"], parents=[common_parser], help="Update the modpack version (not the Minecraft version)")
 
     # Refresh modpack
     parser_refresh = subparsers.add_parser("refresh", aliases=["rf"], parents=[common_parser], help="Refresh the pack.toml and index.toml files")
@@ -82,6 +92,12 @@ def main():
 
         case "update" | "upgrade":
             update_mods(minecraft_versions, launchers, args.mod)
+
+        case "pin" | "hold":
+            pin_mod(minecraft_versions, launchers, args.mod)
+
+        case "unpin" | "unhold":
+            unpin_mod(minecraft_versions, launchers, args.mod)
 
         case "accept-version" | "av":
             accept_version(minecraft_versions, launchers, args.version)
@@ -109,7 +125,7 @@ def main():
 
 # TUI function
 def selection():
-    select = menu(["Add mod", "Remove mod", "Update mods", "Accept version", "Export modpack", "List modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Init modpack"], "What do you want to do?")
+    select = menu(["Add mod", "Remove mod", "Update mods", "Pin mod", "Unpin mod", "Accept version", "Export modpack", "List modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Init modpack"], "What do you want to do?")
 
     if not select:
         return
@@ -132,6 +148,12 @@ def selection():
             case "Update mods":
                 mod_name = input("Enter the mod/resource pack/shader name (--all to update all): ")
                 update_mods(minecraft_versions, launchers, mod_name)
+            case "Pin mod":
+                mod_name = input("Enter the mod/resource pack/shader name: ")
+                pin_mod(minecraft_versions, launchers, mod_name)
+            case "Unpin mod":
+                mod_name = input("Enter the mod/resource pack/shader name: ")
+                unpin_mod(minecraft_versions, launchers, mod_name)
             case "Accept version":
                 version = input("Enter the version to accept: ")
                 accept_version(minecraft_versions, launchers, version)
