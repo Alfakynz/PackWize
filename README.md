@@ -90,7 +90,7 @@ If you'd like to contribute:
 
 - Support for other Packwiz commands
   - `packwiz settings acceptable-versions` ✅
-  - `packwiz list`
+  - `packwiz list` ✅
   - `packwiz migrate`
   - `packwiz pin`
   - `packwiz unpin`

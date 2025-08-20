@@ -36,14 +36,16 @@ def update_modpack_version(minecraft_versions, launchers):
     for minecraft_version in minecraft_versions:
         for launcher in launchers:
             if current_versions[launcher] is not None:
-                print(f"Current {launcher} modpack version: {current_versions[launcher]}")
+                print(f"{minecraft_version}/{launcher} modpack version: {current_versions[launcher]}")
             else:
                 print(f"pack.toml not found for {launcher}.")
 
-    new_version = input("Enter new modpack version: ").strip()
-    if not new_version:
-        print("No version entered. Aborting.")
-        return
+    while True:
+        new_version = input("Enter new modpack version: ").strip()
+        if not new_version:
+            print("No version entered.")
+        else:
+            break
 
     # Update the version line in both pack.toml files if they exist
     for launcher, pack_toml_path in pack_toml_paths:

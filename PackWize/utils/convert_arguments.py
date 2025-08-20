@@ -2,8 +2,8 @@ from pathlib import Path
 
 def convert_arguments(argument, value):
     match argument:
-        case "minecraft_version":
-            match value:
+        case "minecraft_versions":
+            match value.lower():
                 case "all":
                     directories = sorted([
                         d.name
@@ -17,7 +17,7 @@ def convert_arguments(argument, value):
                 case _:
                     return [value]
         
-        case "launcher":
+        case "launchers":
             match value.lower():
                 case "all":
                     return ["CurseForge", "Modrinth"]

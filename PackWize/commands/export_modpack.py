@@ -9,6 +9,8 @@ def export_modpack(minecraft_versions, launchers):
         for launcher in launchers:
             modpack_dir = get_modpack_dir(minecraft_version, launcher)
 
+            print(f"\033[1mExporting modpack for {minecraft_version} with {launcher} launcher...\033[0m")
+
             config_dir = os.path.join(os.path.dirname(modpack_dir), "configurations")
             files_to_copy = []
             if os.path.exists(config_dir) and os.path.isdir(config_dir):
@@ -25,6 +27,7 @@ def export_modpack(minecraft_versions, launchers):
                 print(f"Configurations directory {config_dir} does not exist.")
                 return
 
+            print(f"Copying files to {modpack_dir}...")
             for item in files_to_copy:
                 src, dst, is_dir, desc = item["src"], item["dst"], item["is_dir"], item["desc"]
                 if not os.path.exists(src):
@@ -43,5 +46,7 @@ def export_modpack(minecraft_versions, launchers):
                     sys.exit(1)
 
             # Run the two necessary commands
+            print(f"Files copied to {modpack_dir}\n")
             run_cmd(['packwiz', 'refresh'], modpack_dir)
             run_cmd(['packwiz', launcher.lower(), 'export'], modpack_dir)
+            print(f"Modpack exported successfully for {minecraft_version} for {launcher} launcher.\n")

@@ -7,12 +7,13 @@ from PackWize.commands.remove_mod import remove_mod
 from PackWize.commands.update_mods import update_mods
 from PackWize.commands.accept_version import accept_version
 from PackWize.commands.export_modpack import export_modpack
+from PackWize.commands.list_modpack import list_modpack
 from PackWize.commands.generate_pack_content import generate_pack_content
 from PackWize.commands.update_modpack_version import update_modpack_version
 from PackWize.commands.refresh_modpack import refresh_modpack
 from PackWize.commands.init_modpack import init_modpack
 
-VERSION="1.2.0"
+VERSION="1.3.0"
 
 # CLI function
 def main():
@@ -26,8 +27,8 @@ def main():
 
     # Parent parser for common arguments
     common_parser = argparse.ArgumentParser(add_help=False)
-    common_parser.add_argument("minecraft_version", help="Minecraft version to work in. Use 'all' to select all Minecraft versions")
-    common_parser.add_argument("launcher", help="Launcher to work in. Use 'all' to select all launchers")
+    common_parser.add_argument("minecraft_versions", help="Minecraft version to work in. Use 'all' to select all Minecraft versions")
+    common_parser.add_argument("launchers", help="Launcher to work in. Use 'all' to select all launchers")
 
     # TUI menu
     parser_tui = subparsers.add_parser("tui", help="Show TUI menu")
@@ -51,6 +52,9 @@ def main():
     # Export modpack
     parser_export = subparsers.add_parser("export", aliases=["build"], parents=[common_parser], help="Export the modpack content to a ZIP or MRPACK file. Find the file in the {Minecraft version}/{launcher} directory")
 
+    # List modpack
+    parser_list = subparsers.add_parser("list", aliases=["ls"], parents=[common_parser], help="List mods, resource packs and shaders in the modpack")
+
     # Generate modpack content list
     parser_generate = subparsers.add_parser("generate", aliases=["gen"], parents=[common_parser], help="Export the modpack's content list to an MD file. Find the file in the {Minecraft version} directory")
 
@@ -65,34 +69,37 @@ def main():
 
     args = parser.parse_args()
 
-    if hasattr(args, "minecraft_version") and hasattr(args, "launcher"):
-        minecraft_version = convert_arguments("minecraft_version", args.minecraft_version)
-        launcher = convert_arguments("launcher", args.launcher)
+    if hasattr(args, "minecraft_versions") and hasattr(args, "launchers"):
+        minecraft_versions = convert_arguments("minecraft_versions", args.minecraft_versions)
+        launchers = convert_arguments("launchers", args.launchers)
 
     match args.command:
         case "add" | "install" | "i":
-            add_mod(minecraft_version, launcher, args.mod)
+            add_mod(minecraft_versions, launchers, args.mod)
         
         case "remove" | "rm" | "uninstall":
-            remove_mod(minecraft_version, launcher, args.mod)
+            remove_mod(minecraft_versions, launchers, args.mod)
 
         case "update" | "upgrade":
-            update_mods(minecraft_version, launcher, args.mod)
+            update_mods(minecraft_versions, launchers, args.mod)
 
         case "accept-version" | "av":
-            accept_version(minecraft_version, launcher, args.version)
+            accept_version(minecraft_versions, launchers, args.version)
 
         case "export" | "build":
-            export_modpack(minecraft_version, launcher)
+            export_modpack(minecraft_versions, launchers)
+
+        case "list" | "ls":
+            list_modpack(minecraft_versions, launchers)
 
         case "generate" | "gen":
-            generate_pack_content(minecraft_version, launcher)
+            generate_pack_content(minecraft_versions, launchers)
 
         case "update-version" | "uv" | "set-version" | "change-version":
-            update_modpack_version(minecraft_version, launcher)
+            update_modpack_version(minecraft_versions, launchers)
 
         case "refresh" | "rf":
-            refresh_modpack(minecraft_version, launcher)
+            refresh_modpack(minecraft_versions, launchers)
 
         case "init":
             init_modpack()
@@ -102,7 +109,7 @@ def main():
 
 # TUI function
 def selection():
-    select = menu(["Add mod", "Remove mod", "Update mods", "Accept version", "Export modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Init modpack"], "What do you want to do?")
+    select = menu(["Add mod", "Remove mod", "Update mods", "Accept version", "Export modpack", "List modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Init modpack"], "What do you want to do?")
 
     if not select:
         return
@@ -130,6 +137,9 @@ def selection():
                 accept_version(minecraft_versions, launchers, version)
             case "Export modpack":
                 export_modpack(minecraft_versions, launchers)
+            case "List modpack":
+                list_modpack(minecraft_versions, launchers)
+                return
             case "Generate pack content":
                 generate_pack_content(minecraft_versions, launchers)
             case "Update modpack version":
