@@ -29,7 +29,7 @@ case "$OS" in
 esac
 
 # Detect latest version from GitHub API
-VERSION=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+VERSION=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | sed -n 's/.*"tag_name": "\(.*\)".*/\1/p')
 if [ -z "$VERSION" ]; then
   echo "Could not fetch latest version from GitHub"
   exit 1
