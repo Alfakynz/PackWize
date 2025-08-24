@@ -9,12 +9,17 @@ Made for creators who maintain multiple versions of a modpack.
 
 Run packwiz commands for all Minecraft versions and launchers you want at the same time. Supports most packwiz commands.
 
-- Add mods to the modpack
+- Add mods to the modpack (url add supported)
 - Remove mods from the modpack
 - Update mods in the modpack
+- Pin/unpin mods in the modpack
+- Set an acceptable version
 - Export the modpack contents to a ZIP or MRPACK file
+- List mods in the modpack
 - Export the modpack's content list to an MD file
+- Update the modpack version (not the minecraft version)
 - Refresh the pack.toml and index.toml files
+- Migrate Minecraft/lodaer version to another
 - Initialize a new modpack and create directories
 
 All of these functions can be run for one Minecraft version in one launcher or for all Minecraft versions in all launchers.
@@ -91,8 +96,8 @@ If you'd like to contribute:
 - Support for other Packwiz commands
   - `packwiz settings acceptable-versions` ✅
   - `packwiz list` ✅
-  - `packwiz migrate`
+  - `packwiz migrate` ✅
   - `packwiz pin` ✅
   - `packwiz unpin` ✅
-  - `packwiz url add`
+  - `packwiz url add` ✅
 - Documentation

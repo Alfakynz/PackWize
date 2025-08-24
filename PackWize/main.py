@@ -8,15 +8,17 @@ from PackWize.commands.remove_mod import remove_mod
 from PackWize.commands.update_mods import update_mods
 from PackWize.commands.pin_mod import pin_mod
 from PackWize.commands.unpin_mod import unpin_mod
+from PackWize.commands.url_add import url_add
 from PackWize.commands.accept_version import accept_version
 from PackWize.commands.export_modpack import export_modpack
 from PackWize.commands.list_modpack import list_modpack
 from PackWize.commands.generate_pack_content import generate_pack_content
 from PackWize.commands.update_modpack_version import update_modpack_version
 from PackWize.commands.refresh_modpack import refresh_modpack
+from PackWize.commands.migrate import migrate
 from PackWize.commands.init_modpack import init_modpack
 
-VERSION="1.4.0"
+VERSION="1.5.0"
 
 # CLI function
 def main():
@@ -52,9 +54,14 @@ def main():
     parser_pin = subparsers.add_parser("pin", aliases=["hold"], parents=[common_parser], help="Pin a mod in the modpack to prevent it from being updated automatically")
     parser_pin.add_argument("mod", help="Mod/resource pack/shaderpack you want to pin.")
 
-    # Unin mod
+    # Unpin mod
     parser_unpin = subparsers.add_parser("unpin", aliases=["unhold"], parents=[common_parser], help="Unpin a mod in the modpack to allow it to be updated automatically")
     parser_unpin.add_argument("mod", help="Mod/resource pack/shaderpack you want to unpin.")
+
+    # URL add
+    parser_url_add = subparsers.add_parser("url-add", aliases=["url", "ua"], parents=[common_parser], help="Add a custom mod/resource pack/shaderpack in the modpack from a URL")
+    parser_url_add.add_argument("mod", help="Name of the mod/resource pack/shaderpack.")
+    parser_url_add.add_argument("url", help="URL of the mod/resource pack/shaderpack.")
 
     # Accept version
     parser_accept_version = subparsers.add_parser("accept-version", aliases=["av"], parents=[common_parser], help="Accept a specific version for the modpack")
@@ -74,6 +81,11 @@ def main():
 
     # Refresh modpack
     parser_refresh = subparsers.add_parser("refresh", aliases=["rf"], parents=[common_parser], help="Refresh the pack.toml and index.toml files")
+
+    # Migrate modpack
+    parser_migrate = subparsers.add_parser("migrate", aliases=["mg"], parents=[common_parser], help="Migrate the modpack to a new Minecraft/loader version")
+    parser_migrate.add_argument("target", help="Choose between Minecraft or loader version to migrate")
+    parser_migrate.add_argument("version", help="Enter the target version to migrate to")
 
     # Init modpack
     parser_init = subparsers.add_parser("init", help="Initialize a new modpack and create directories")
@@ -100,10 +112,13 @@ def main():
         case "unpin" | "unhold":
             unpin_mod(minecraft_versions, launchers, args.mod)
 
+        case "url-add" | "url" | "ua":
+            url_add(minecraft_versions, launchers, args.mod, args.url)
+
         case "accept-version" | "av":
             accept_version(minecraft_versions, launchers, args.version)
 
-        case "export" | "build":
+        case "export" | "ex" | "build":
             export_modpack(minecraft_versions, launchers)
 
         case "list" | "ls":
@@ -112,11 +127,14 @@ def main():
         case "generate" | "gen":
             generate_pack_content(minecraft_versions, launchers)
 
-        case "update-version" | "uv" | "set-version" | "change-version":
+        case "update-version" | "uv" | "set-version" | "sv" | "change-version" | "cv":
             update_modpack_version(minecraft_versions, launchers)
 
         case "refresh" | "rf":
             refresh_modpack(minecraft_versions, launchers)
+
+        case "migrate" | "mg":
+            migrate(minecraft_versions, launchers, args.target, args.version)
 
         case "init":
             init_modpack()
@@ -126,7 +144,7 @@ def main():
 
 # TUI function
 def selection():
-    select = menu(["Add mod", "Remove mod", "Update mods", "Pin mod", "Unpin mod", "Accept version", "Export modpack", "List modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Init modpack"], "What do you want to do?")
+    select = menu(["Add mod", "Remove mod", "Update mods", "Pin mod", "Unpin mod", "Url add", "Accept version", "Export modpack", "List modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Migrate", "Init modpack"], "What do you want to do?")
 
     if not select:
         return
@@ -155,6 +173,10 @@ def selection():
             case "Unpin mod":
                 mod_name = better_input("Enter the mod/resource pack/shader name: ")
                 unpin_mod(minecraft_versions, launchers, mod_name)
+            case "Url add":
+                mod_name = better_input("Enter the mod/resource pack/shader name: ")
+                url = better_input("Enter the URL to add: ")
+                url_add(minecraft_versions, launchers, mod_name, url)
             case "Accept version":
                 version = better_input("Enter the version to accept: ")
                 accept_version(minecraft_versions, launchers, version)
@@ -169,6 +191,10 @@ def selection():
                 update_modpack_version(minecraft_versions, launchers)
             case "Refresh modpack":
                 refresh_modpack(minecraft_versions, launchers)
+            case "Migrate":
+                target = better_input("Enter the target to migrate (minecraft/loader): ")
+                version = better_input("Enter the target version to migrate to: ")
+                migrate(minecraft_versions, launchers, target, version)
             case "Init modpack":
                 init_modpack()
             case None:

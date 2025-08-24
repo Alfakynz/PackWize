@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "packwize"
-version = "1.4.0"
+version = "1.5.0"
 description = "A CLI/TUI to manage modpacks easier than just using Packwiz. Based on Packwiz"
 authors = [{name="Alfakynz"}]
 license = {text = "MIT"}
