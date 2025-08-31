@@ -17,8 +17,9 @@ from PackWize.commands.update_modpack_version import update_modpack_version
 from PackWize.commands.refresh_modpack import refresh_modpack
 from PackWize.commands.migrate import migrate
 from PackWize.commands.init_modpack import init_modpack
+from PackWize.commands.update_packwize import update_packwize
 
-VERSION="1.5.0"
+VERSION="1.5.1"
 
 # CLI function
 def main():
@@ -90,6 +91,9 @@ def main():
     # Init modpack
     parser_init = subparsers.add_parser("init", help="Initialize a new modpack and create directories")
 
+    # Update PackWize
+    parser_update_packwize = subparsers.add_parser("update-packwize", aliases=["up"], help="Update PackWize to the latest version")
+
     args = parser.parse_args()
 
     if hasattr(args, "minecraft_versions") and hasattr(args, "launchers"):
@@ -139,22 +143,29 @@ def main():
         case "init":
             init_modpack()
 
+        case "update-packwize" | "up":
+            update_packwize()
+
         case "tui" | _:
-            selection()
+            try:
+                selection()
+            except KeyboardInterrupt:
+                print("\nOperation aborted by user.")
+                exit(-1)
 
 # TUI function
 def selection():
-    select = menu(["Add mod", "Remove mod", "Update mods", "Pin mod", "Unpin mod", "Url add", "Accept version", "Export modpack", "List modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Migrate", "Init modpack"], "What do you want to do?")
+    select = menu(["Add mod", "Remove mod", "Update mods", "Pin mod", "Unpin mod", "Url add", "Accept version", "Export modpack", "List modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Migrate", "Init modpack", "Update PackWize"], "What do you want to do?")
 
     if not select:
         return
 
-    if select != "Init modpack":
+    if select != "Init modpack" and select != "Update PackWize":
         minecraft_versions, launchers = get_mcv_launchers()
     else:
         minecraft_versions, launchers = [], []
 
-    if (not minecraft_versions or not launchers) and not (select == "Init modpack" and not minecraft_versions and not launchers):
+    if (not minecraft_versions or not launchers) and not select == "Init modpack" and not select == "Update PackWize":
         main()
     else:
         match select:
@@ -197,6 +208,8 @@ def selection():
                 migrate(minecraft_versions, launchers, target, version)
             case "Init modpack":
                 init_modpack()
+            case "Update PackWize":
+                update_packwize()
             case None:
                 return
             case _:
