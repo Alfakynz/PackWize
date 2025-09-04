@@ -1,6 +1,17 @@
 from pathlib import Path
 
-def convert_arguments(argument, value):
+def convert_arguments(argument: str, value: str) -> list[str] | None:
+    """
+    Convert arguments like `minecraft_versions` or `launchers`
+
+    Arguments: 
+        argument: str. The argument type to check ('minecraft_versions' or 'launchers' are supported)
+        value: str. The value to convert
+    
+    Returns:
+        list[str]
+        None: if nothing matchs
+    """
     match argument:
         case "minecraft_versions":
             match value.lower():

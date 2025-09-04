@@ -22,7 +22,12 @@ from PackWize.commands.update_packwize import update_packwize
 VERSION="1.5.1"
 
 # CLI function
-def main():
+def main() -> None:
+    """
+    CLI function, use `python main.py [argument]`
+    
+    Returns nothing
+    """
     parser = argparse.ArgumentParser(
         prog="packwize",
         description="A CLI/TUI to manage modpack easier than just using Packwiz. Based on Packwiz"
@@ -154,7 +159,12 @@ def main():
                 exit(-1)
 
 # TUI function
-def selection():
+def selection() -> None:
+    """
+    TUI function, use `python main.py` and select an option from the menu
+
+    Returns nothing
+    """
     select = menu(["Add mod", "Remove mod", "Update mods", "Pin mod", "Unpin mod", "Url add", "Accept version", "Export modpack", "List modpack", "Generate pack content", "Update modpack version", "Refresh modpack", "Migrate", "Init modpack", "Update PackWize"], "What do you want to do?")
 
     if not select:

@@ -1,7 +1,19 @@
 from PackWize.utils.menu import menu
 from pathlib import Path
 
-def get_mc_version(all = True):
+def get_mc_version(all: bool = True) -> list[str] | None:
+    """
+    A menu to select a minecraft version
+
+    Arguments:
+        all: bool (default: True). 
+            If True, allows selecting from all versions. 
+            If False, only one version can be selected
+
+    Returns:
+        list[str]: A list containing all Minecraft versions or only one Minecraft version
+        None: if nothing matches
+    """
     # Get all Minecraft version directories (directories with digits in name, not hidden)
     directories = sorted([
         d.name

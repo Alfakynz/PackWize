@@ -1,6 +1,17 @@
 import curses
 
-def menu(table, title="Select an option:"):
+def menu(table: list[str], title: str = "Select an option:"):
+    """
+    Menu for the TUI.
+
+    Arguments:
+        table: list[str]. All available options
+        title: str (default: 'Select an option:'). The menu title
+    
+    Returns:
+        str: the option selected
+        None: if an error occurs or no option is selected
+    """
     def inner(stdscr):
         curses.curs_set(0)
         options = list(table) + ["Quit"]
