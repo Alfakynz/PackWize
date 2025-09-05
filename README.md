@@ -93,11 +93,4 @@ If you'd like to contribute:
 
 ## To Do
 
-- Support for other Packwiz commands
-  - `packwiz settings acceptable-versions` ✅
-  - `packwiz list` ✅
-  - `packwiz migrate` ✅
-  - `packwiz pin` ✅
-  - `packwiz unpin` ✅
-  - `packwiz url add` ✅
-- Documentation
+- Documentation (website)

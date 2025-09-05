@@ -1,6 +1,11 @@
 import os
 
-def update_packwize():
+def update_packwize() -> None:
+    """
+    Update PackWize to the latest version.
+    
+    Returns nothing
+    """
     if os.name == 'nt':  # Windows
         print("Updating PackWize on Windows is not supported yet.")
     else:  # macOS and Linux

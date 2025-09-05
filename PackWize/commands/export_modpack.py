@@ -4,7 +4,16 @@ import sys
 import os
 import shutil
 
-def export_modpack(minecraft_versions, launchers):
+def export_modpack(minecraft_versions: list[str], launchers: list[str]) -> None:
+    """
+    Export modpacks for multiple Minecraft versions and launchers.
+    
+    Arguments:
+        minecraft_versions: list[str]. List of Minecraft versions
+        launchers: list[str]. List of launchers
+
+    Returns nothing
+    """
     for minecraft_version in minecraft_versions:
         for launcher in launchers:
             modpack_dir = get_modpack_dir(minecraft_version, launcher)

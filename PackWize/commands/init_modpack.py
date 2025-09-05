@@ -3,11 +3,17 @@ import shutil
 import re
 from PackWize.utils.run_cmd import run_cmd
 
-MODRINTH = ["modrinth", "mr"]
-CURSEFORGE = ["curseforge", "cf"]
-LAUNCHERS = MODRINTH + CURSEFORGE + ["all"]
+MODRINTH: list[str] = ["modrinth", "mr"]
+CURSEFORGE: list[str] = ["curseforge", "cf"]
+LAUNCHERS: list[str] = MODRINTH + CURSEFORGE + ["all"]
 
-def init_modpack():
+def init_modpack() -> None:
+    """
+    Initialize a modpack for a specific Minecraft version and launcher.
+    Prompts the user for Minecraft version and launcher (Modrinth, CurseForge, or All).
+    Creates the necessary directory structure and initializes the modpack using Packwiz.
+    Returns nothing
+    """
     while True:
         minecraft_version = input("PackWize: Enter Minecraft version: ")
         

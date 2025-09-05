@@ -1,9 +1,18 @@
 from pathlib import Path
 import tomllib
 
-OUTPUT_FILE = "PACK_CONTENT.md"
+OUTPUT_FILE: str = "PACK_CONTENT.md"
 
-def generate_pack_content(minecraft_versions, launchers):
+def generate_pack_content(minecraft_versions: list[str], launchers: list[str]) -> None:
+    """
+    Generate a markdown file listing all mods, resource packs, and shader packs used in the modpack.
+
+    Arguments:
+        minecraft_versions: list[str]. List of Minecraft versions
+        launchers: list[str]. List of launchers
+        
+    Returns nothing
+    """
     types = [
         ("mods", "Mods"),
         ("resourcepacks", "Resource packs"),

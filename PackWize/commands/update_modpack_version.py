@@ -1,7 +1,15 @@
-from PackWize.utils.get_mcv_launchers import get_mcv_launchers
 import os
 
-def update_modpack_version(minecraft_versions, launchers):
+def update_modpack_version(minecraft_versions: list[str], launchers: list[str]) -> None:
+    """
+    Update the modpack version in pack.toml for multiple Minecraft versions and launchers.
+
+    Arguments:
+        minecraft_versions: list[str]. List of Minecraft versions
+        launchers: list[str]. List of launchers (e.g., ["CurseForge", "Modrinth"])
+
+    Returns nothing
+    """
     pack_toml_paths = []
 
     for minecraft_version in minecraft_versions:
