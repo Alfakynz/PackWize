@@ -19,7 +19,7 @@ from PackWize.commands.migrate import migrate
 from PackWize.commands.init_modpack import init_modpack
 from PackWize.commands.update_packwize import update_packwize
 
-VERSION="1.5.2"
+VERSION="1.5.3"
 
 # CLI function
 def main() -> None:
@@ -54,7 +54,8 @@ def main() -> None:
 
     # Update mods
     parser_update = subparsers.add_parser("update", aliases=["upgrade"], parents=[common_parser], help="Update mod in the modpack")
-    parser_update.add_argument("mod", help="Mod/resource pack/shaderpack you want to update. Use '--all' to update all)")
+    parser_update.add_argument("mod", nargs="?", help="Mod/resource pack/shaderpack you want to update. Use '--all' to update all)")
+    parser_update.add_argument("--all", action="store_true", help="Update all mods/resource packs/shaderpacks in the modpack")
 
     # Pin mod
     parser_pin = subparsers.add_parser("pin", aliases=["hold"], parents=[common_parser], help="Pin a mod in the modpack to prevent it from being updated automatically")
@@ -113,7 +114,12 @@ def main() -> None:
             remove_mod(minecraft_versions, launchers, args.mod)
 
         case "update" | "upgrade":
-            update_mods(minecraft_versions, launchers, args.mod)
+            if args.all:
+                update_mods(minecraft_versions, launchers, "--all")
+            elif args.mod:
+                update_mods(minecraft_versions, launchers, args.mod)
+            else:
+                print("Please specify a mod to update or use '--all' to update all mods.")
 
         case "pin" | "hold":
             pin_mod(minecraft_versions, launchers, args.mod)
