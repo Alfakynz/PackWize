@@ -1,6 +1,5 @@
 import os
 import subprocess
-import urllib.request
 import json
 
 def clean_version(v: str) -> str:
