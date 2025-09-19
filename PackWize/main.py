@@ -19,7 +19,7 @@ from PackWize.commands.migrate import migrate
 from PackWize.commands.init_modpack import init_modpack
 from PackWize.commands.update_packwize import update_packwize
 
-VERSION="1.5.4"
+VERSION="1.5.5"
 
 # CLI function
 def main() -> None:
@@ -192,7 +192,7 @@ def selection() -> None:
                 mod_name = better_input("Enter the mod/resource pack/shader name: ")
                 remove_mod(minecraft_versions, launchers, mod_name)
             case "Update mods":
-                mod_name = better_input("Enter the mod/resource pack/shader name (--all to update all): ", default="--all")
+                mod_name = better_input("Enter the mod/resource pack/shader name (--all to update all): ", default_value="--all")
                 update_mods(minecraft_versions, launchers, mod_name)
             case "Pin mod":
                 mod_name = better_input("Enter the mod/resource pack/shader name: ")
