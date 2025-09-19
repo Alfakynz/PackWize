@@ -40,9 +40,18 @@ def get_latest_version() -> str:
     Returns: str. The latest PackWize version
     """
     url = "https://api.github.com/repos/Alfakynz/PackWize/releases/latest"
-    with urllib.request.urlopen(url) as response:
-        data = json.loads(response.read().decode())
-    return clean_version(data["tag_name"])
+    try:
+        result = subprocess.run(
+            ["curl", "-fsSL", url],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        data = json.loads(result.stdout)
+        return clean_version(data["tag_name"])
+    except subprocess.CalledProcessError:
+        print("❌ Failed to fetch latest version with curl.")
+        return "0.0.0"
 
 
 def version_tuple(v: str) -> tuple[int, ...]:

@@ -24,9 +24,6 @@ jobs:
         with:
           python-version: "3.13.5"
 
-      - name: Install certifi
-        run: pip install --upgrade certifi
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip

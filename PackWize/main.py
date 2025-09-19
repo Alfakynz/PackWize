@@ -19,7 +19,7 @@ from PackWize.commands.migrate import migrate
 from PackWize.commands.init_modpack import init_modpack
 from PackWize.commands.update_packwize import update_packwize
 
-VERSION="1.5.5"
+VERSION="1.5.6"
 
 # CLI function
 def main() -> None:
