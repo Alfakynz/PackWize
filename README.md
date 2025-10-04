@@ -60,8 +60,17 @@ All of these functions can be run for one Minecraft version in one launcher or f
 
 ### 👤 For users
 
-- Linux/macOS: `curl -fsSL https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.sh | bash`
-- Windows: `irm https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.ps1 | iex`
+- Linux/macOS
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.sh | bash
+```
+
+- Windows
+
+```powershell
+irm https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.ps1 | iex
+```
 
 ### 👨‍💻 For devs
 
@@ -75,8 +84,17 @@ All of these functions can be run for one Minecraft version in one launcher or f
 
 ### 👤 For users
 
-- Linux/macos: `curl -fsSL https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.sh | bash -s uninstall`
-- Windows: `iex "& { $(irm https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.ps1) } -Uninstall"`
+- Linux/macos
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.sh | bash -s uninstall
+```
+
+- Windows
+
+```powershell
+iex "& { $(irm https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.ps1) } -Uninstall"
+```
 
 ### 👨‍💻 For devs
 
@@ -93,4 +111,7 @@ If you'd like to contribute:
 
 ## To Do
 
+- Use Go instead of Python
+- Make a `dist` folder for exported files
+- Make configurations dir for `packwize init`
 - Documentation (website)
