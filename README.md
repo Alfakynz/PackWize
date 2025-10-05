@@ -1,8 +1,17 @@
 # PackWize
 
+# ⚠️ This is the Go version of PackWize, some features are not available yet ⚠️
+
+The following features will be added in the future:
+
+- TUI
+- Easy updates
+
+## 📜 Description
+
 This CLI/TUI was created to manage modpacks more easily than just using [Packwiz](https://packwiz.infra.link/). <br />
 Run Packwiz commands across multiple directories at the same time. <br />
-Easily create modpacks by placing you config file into a configuration directory, it will be copied into your modpack directory when exporting it. <br />
+Easily create modpacks by placing you config file into a `configurations` directory, it will be copied into your modpack directory when exporting it. <br />
 Made for creators who maintain multiple versions of a modpack.
 
 ## ✨ Features
@@ -14,7 +23,7 @@ Run packwiz commands for all Minecraft versions and launchers you want at the sa
 - Update mods in the modpack
 - Pin/unpin mods in the modpack
 - Set an acceptable version
-- Export the modpack contents to a ZIP or MRPACK file
+- Export the modpack contents to a ZIP or MRPACK file (files are moved to: `dist/{version}`)
 - List mods in the modpack
 - Export the modpack's content list to an MD file
 - Update the modpack version (not the minecraft version)
@@ -26,79 +35,79 @@ All of these functions can be run for one Minecraft version in one launcher or f
 
 ## 🌲 Modpack tree example
 
-1.21.1 <br />
-┣ CurseForge <br />
-┃ ┣ mods <br />
-┃ ┃ ┣ fabric-api.pw.toml <br />
-┃ ┃ ┣ modmenu.pw.toml <br />
-┃ ┃ ┣ sodium.pw.toml <br />
-┃ ┃ ┗ text-placeholder-api.pw.toml <br />
-┃ ┣ index.toml <br />
-┃ ┗ pack.toml <br />
-┣ Modrinth <br />
-┃ ┣ mods <br />
-┃ ┃ ┣ fabric-api.pw.toml <br />
-┃ ┃ ┣ modmenu.pw.toml <br />
-┃ ┃ ┣ placeholder-api.pw.toml <br />
-┃ ┃ ┗ sodium.pw.toml <br />
-┃ ┣ index.toml <br />
-┃ ┗ pack.toml <br />
-┣ configurations <br />
-┃ ┣ config <br />
-┃ ┃ ┗ sodium-options.json <br />
-┃ ┣ .packwizignore <br />
-┃ ┣ icon.png <br />
-┃ ┗ options.txt <br />
-┗ PACK_CONTENT.md <br />
+Modpack <br />
+┣ 1.21.1 <br />
+┃ ┣ CurseForge <br />
+┃ ┃ ┣ mods <br />
+┃ ┃ ┃ ┣ fabric-api.pw.toml <br />
+┃ ┃ ┃ ┣ modmenu.pw.toml <br />
+┃ ┃ ┃ ┣ sodium.pw.toml <br />
+┃ ┃ ┃ ┗ text-placeholder-api.pw.toml <br />
+┃ ┃ ┣ index.toml <br />
+┃ ┃ ┗ pack.toml <br />
+┃ ┣ Modrinth <br />
+┃ ┃ ┣ mods <br />
+┃ ┃ ┃ ┣ fabric-api.pw.toml <br />
+┃ ┃ ┃ ┣ modmenu.pw.toml <br />
+┃ ┃ ┃ ┣ placeholder-api.pw.toml <br />
+┃ ┃ ┃ ┗ sodium.pw.toml <br />
+┃ ┃ ┣ index.toml <br />
+┃ ┃ ┗ pack.toml <br />
+┃ ┣ configurations <br />
+┃ ┃ ┣ config <br />
+┃ ┃ ┃ ┗ sodium-options.json <br />
+┃ ┃ ┣ .packwizignore <br />
+┃ ┃ ┣ icon.png <br />
+┃ ┃ ┗ options.txt <br />
+┃ ┗ PACK_CONTENT.md <br />
+┣ dist <br />
+┃ ┣ 1.21.1 <br />
+┃ ┃ ┣ Modpack-1.0.0.mrpack <br />
+┗ ┗ ┗ Modpack-1.0.0.zip
 
 ## ⚙️ Requirements
 
 - [Packwiz](https://packwiz.infra.link/)
-- [Python 3.13.5 (or higher)](https://python.org) (for devs)
+- [Go 1.21.5 (or higher)](https://go.dev/)
 
 ## 📦 Installation
 
 ### 👤 For users
 
-- Linux/macOS
-
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.sh | bash
-```
-
-- Windows
-
-```powershell
-irm https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.ps1 | iex
+go install github.com/Alfakynz/PackWize/cmd/packwize@go
 ```
 
 ### 👨‍💻 For devs
 
-- `git clone https://github.com/Alfakynz/PackWize.git`
-- `cd PackWize`
-- `pip install -r requirements.txt` (Windows only)
-- `pip install pyinstaller` (optional)
-- `pip install .` or `pyinstaller --onefile PackWize/main.py packwize` (if you've installed PyInstaller)
+```sh
+git clone https://github.com/Alfakynz/PackWize.git
+cd PackWize
+```
+
+Run the command without compiling:
+
+```sh
+go run ./cmd/packwize
+```
+
+To Compile:
+
+```sh
+make build
+```
 
 ## ❌ Uninstallation
 
 ### 👤 For users
 
-- Linux/macos
-
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.sh | bash -s uninstall
-```
-
-- Windows
-
-```powershell
-iex "& { $(irm https://raw.githubusercontent.com/Alfakynz/PackWize/main/install.ps1) } -Uninstall"
+rm $(go env GOPATH)/bin/packwize
 ```
 
 ### 👨‍💻 For devs
 
-- `pip uninstall packwize`
+You just need to remove the `PackWize` directory
 
 ## 🤝 Contributing
 
@@ -111,7 +120,6 @@ If you'd like to contribute:
 
 ## To Do
 
-- Use Go instead of Python
-- Make a `dist` folder for exported files
+- Make a `dist` folder for exported files ✅ (only with Go version)
 - Make configurations dir for `packwize init`
 - Documentation (website)

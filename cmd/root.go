@@ -34,7 +34,7 @@ var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "PackWize",
+	Use:   "packwize",
 	Short: "A CLI to manage modpack easier than just using Packwiz. Based on Packwiz",
 	Long: `
 	This CLI/TUI was created to manage modpacks more easily than just using [Packwiz](https://packwiz.infra.link/).
@@ -57,7 +57,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.PackWize.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.packwize.yaml)")
 
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
@@ -75,7 +75,7 @@ func initConfig() {
 		// Search config in home directory with name ".PackWize" (without extension).
 		viper.AddConfigPath(home)
 		viper.SetConfigType("yaml")
-		viper.SetConfigName(".PackWize")
+		viper.SetConfigName(".packwize")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match

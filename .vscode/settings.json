@@ -10,5 +10,6 @@
     ".vscode": true,
     ".gitignore": true
   },
-  "hide-files.files": [".gitattributes", ".vscode", ".gitignore"]
+  "hide-files.files": [".gitattributes", ".vscode", ".gitignore"],
+  "makefile.configureOnOpen": false
 }
