@@ -29,7 +29,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var Version = "v2.0.0-a"
+const VERSION = "v2.0.0-a"
 var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
@@ -41,7 +41,7 @@ var rootCmd = &cobra.Command{
 	Run Packwiz commands across multiple directories at the same time.
 	Easily create modpacks by placing you config file into a configuration directory, it will be copied into your modpack directory when exporting it.
 	Made for creators who maintain multiple versions of a modpack.`,
-	Version: Version,
+	Version: VERSION,
 	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
