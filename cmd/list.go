@@ -10,10 +10,10 @@ import (
 
 // listModCmd represents the list command
 var listModCmd = &cobra.Command{
-	Use:   "list [minecraft_version] [launcher]",
+	Use: "list [minecraft_version] [launcher]",
 	Aliases: []string{"ls"},
 	Short: "List mods in the modpack",
-	Args:  cobra.ExactArgs(2),
+	Args: cobra.ExactArgs(2),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]
 		launcher := args[1]

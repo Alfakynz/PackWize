@@ -10,10 +10,10 @@ import (
 
 // addModCmd represents the add command
 var addModCmd = &cobra.Command{
-	Use:   "add [minecraft_version] [launcher] [mod]",
+	Use: "add [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"install", "a", "i"},
 	Short: "Add a mod to the modpack",
-	Args:  cobra.ExactArgs(3),
+	Args: cobra.ExactArgs(3),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]
 		launcher := args[1]

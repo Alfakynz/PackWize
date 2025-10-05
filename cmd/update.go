@@ -12,10 +12,10 @@ var allFlag bool
 
 // updateModCmd represents the update command
 var updateModCmd = &cobra.Command{
-	Use:   "update [minecraft_version] [launcher] [mod]",
+	Use: "update [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"upgrade", "u"},
 	Short: "Update a mod to the modpack",
-	Args:  cobra.MaximumNArgs(3),
+	Args: cobra.MaximumNArgs(3),
 	Run: func(c *cobra.Command, args []string) {
 		var mod string
 		if allFlag {

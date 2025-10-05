@@ -8,12 +8,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// migrateModpackCmd represents the pin command
+// migrateModpackCmd represents the migrate command
 var migrateModpackCmd = &cobra.Command{
-	Use:   "migrate [minecraft_version] [launcher] [target] [version]",
+	Use: "migrate [minecraft_version] [launcher] [target] [version]",
 	Aliases: []string{"mg"},
 	Short: "Migrate a modpack to another Minecraft or loader version",
-	Args:  cobra.ExactArgs(4),
+	Args: cobra.ExactArgs(4),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]
 		launcher := args[1]

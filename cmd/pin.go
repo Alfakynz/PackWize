@@ -10,10 +10,10 @@ import (
 
 // pinModCmd represents the pin command
 var pinModCmd = &cobra.Command{
-	Use:   "pin [minecraft_version] [launcher] [mod]",
+	Use: "pin [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"hold", "lock"},
 	Short: "Pin a mod to the modpack",
-	Args:  cobra.ExactArgs(3),
+	Args: cobra.ExactArgs(3),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]
 		launcher := args[1]

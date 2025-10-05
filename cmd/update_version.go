@@ -10,10 +10,10 @@ import (
 
 // updateVersionCmd represents the pin command
 var updateVersionCmd = &cobra.Command{
-	Use:   "update-version [minecraft_version] [launcher] [mod]",
+	Use: "update-version [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"uv"},
 	Short: "Update the modpack version",
-	Args:  cobra.ExactArgs(3),
+	Args: cobra.ExactArgs(3),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]
 		launcher := args[1]

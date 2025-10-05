@@ -10,10 +10,10 @@ import (
 
 // acceptVersionCmd represents the settings acceptable-versions command
 var acceptVersionCmd = &cobra.Command{
-	Use:   "accept-version [minecraft_version] [launcher] [mod]",
+	Use: "accept-version [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"av"},
 	Short: "Accept a specific version for the modpack",
-	Args:  cobra.ExactArgs(3),
+	Args: cobra.ExactArgs(3),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]
 		launcher := args[1]
