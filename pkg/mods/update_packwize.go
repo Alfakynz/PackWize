@@ -6,8 +6,8 @@ import (
 	"os/exec"
 )
 
-// Upgrade manages the PackWize upgrade process
-func Upgrade(version string) {
+// UpdatePackWize manages the PackWize upgrade process
+func UpdatePackWize(version string) {
 	if version == "" {
 		version = "latest"
 	}

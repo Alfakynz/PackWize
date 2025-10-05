@@ -12,7 +12,7 @@ import (
 )
 
 // ExportMod manages exporting the modpack for multiple versions and launchers
-func ExportMod(minecraftVersionArg string, launcherArg string) {
+func ExportMod(minecraftVersionArg, launcherArg string) {
 	// Convert arguments
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)

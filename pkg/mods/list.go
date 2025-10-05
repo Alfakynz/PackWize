@@ -10,7 +10,7 @@ import (
 )
 
 // ListMod manages listing mods for multiple versions and launchers
-func ListMod(minecraftVersionArg string, launcherArg string) {
+func ListMod(minecraftVersionArg, launcherArg string) {
 	// Convert arguments
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)

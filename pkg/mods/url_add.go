@@ -9,8 +9,8 @@ import (
 	"github.com/Alfakynz/PackWize/pkg/utils"
 )
 
-// UrlMod manages add a mod via URL for multiple versions and launchers
-func UrlMod(minecraftVersionArg, launcherArg, mod string, url string) {
+// UrlAdd manages add a mod via URL for multiple versions and launchers
+func UrlAdd(minecraftVersionArg, launcherArg, mod, url string) {
 	// Convert arguments
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)

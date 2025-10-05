@@ -8,8 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// urlModCmd represents the url add command
-var urlModCmd = &cobra.Command{
+// urlAddCmd represents the url add command
+var urlAddCmd = &cobra.Command{
 	Use:   "url [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"url-add", "ua"},
 	Short: "Add a custom mod (with url) to the modpack",
@@ -20,10 +20,10 @@ var urlModCmd = &cobra.Command{
 		mod := args[2]
 		url := args[3]
 
-		mods.UrlMod(mcVersion, launcher, mod, url)
+		mods.UrlAdd(mcVersion, launcher, mod, url)
 },
 }
 
 func init() {
-	rootCmd.AddCommand(urlModCmd)
+	rootCmd.AddCommand(urlAddCmd)
 }
