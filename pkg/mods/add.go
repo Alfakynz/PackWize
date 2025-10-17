@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/Alfakynz/PackWize/pkg/utils"
 )
@@ -25,10 +26,11 @@ func AddMod(minecraftVersionArg, launcherArg, mod string) {
 		for _, l := range launchers {
 			fmt.Printf("Adding %s to %s/%s ...\n", mod, v, l)
 
-			cmd := exec.Command("packwiz", l, "add", mod)
+			cmd := exec.Command("packwiz", strings.ToLower(l), "add", mod)
 			cmd.Dir = fmt.Sprintf("%s/%s", v, l)
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
+			cmd.Stdin = os.Stdin
 
 			if err := cmd.Run(); err != nil {
 				log.Printf("Error adding %s to %s/%s: %v\n", mod, v, l, err)

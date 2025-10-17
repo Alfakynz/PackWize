@@ -29,6 +29,7 @@ func UpdateMod(minecraftVersionArg, launcherArg, mod string) {
 			cmd.Dir = fmt.Sprintf("%s/%s", v, l)
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
+			cmd.Stdin = os.Stdin
 
 			if err := cmd.Run(); err != nil {
 				log.Printf("Error updating %s to %s/%s: %v\n", mod, v, l, err)

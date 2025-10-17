@@ -29,6 +29,7 @@ func MigrateModpack(minecraftVersionArg, launcherArg, target, version string) {
 			cmd.Dir = fmt.Sprintf("%s/%s", v, l)
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
+			cmd.Stdin = os.Stdin
 
 			if err := cmd.Run(); err != nil {
 				log.Printf("Error migrating the modpack in %s/%s: %v\n", v, l, err)
