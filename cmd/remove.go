@@ -12,7 +12,8 @@ import (
 var removeModCmd = &cobra.Command{
 	Use: "remove [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"uninstall", "rm"},
-	Short: "Remove a mod to the modpack",
+	Long:  "Remove an external file from the modpack; equivalent to manually deleting the file and running packwiz refresh",
+	Short: "Remove a mod from the modpack",
 	Args: cobra.ExactArgs(3),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]

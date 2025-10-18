@@ -10,9 +10,10 @@ import (
 
 // urlAddCmd represents the url add command
 var urlAddCmd = &cobra.Command{
-	Use: "url [minecraft_version] [launcher] [mod]",
+	Use: "url [minecraft_version] [launcher] [mod_name] [url]",
 	Aliases: []string{"url-add", "ua"},
-	Short: "Add a custom mod (with url) to the modpack",
+	Long:  "Add an external file from a direct download link, for sites not directly supported by Packwiz",
+	Short: "Add a custom mod (via URL) to the modpack",
 	Args: cobra.ExactArgs(4),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]

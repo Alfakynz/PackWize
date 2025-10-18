@@ -12,6 +12,7 @@ import (
 var updateVersionCmd = &cobra.Command{
 	Use: "update-version [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"uv"},
+	Long:  "Update the modpack version for the specified Minecraft version and launcher",
 	Short: "Update the modpack version",
 	Args: cobra.ExactArgs(3),
 	Run: func(c *cobra.Command, args []string) {

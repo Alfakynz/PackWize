@@ -12,6 +12,7 @@ import (
 var updatePackWizeCmd = &cobra.Command{
 	Use: "update-packwize [version]",
 	Aliases: []string{"upgrade-packwize", "up"},
+	Long:  "Upgrade PackWize to the latest available version",
 	Short: "Upgrade PackWize to the latest version",
 	Args: cobra.MaximumNArgs(1),
 	Run: func(c *cobra.Command, args []string) {

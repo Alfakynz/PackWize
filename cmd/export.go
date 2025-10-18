@@ -10,9 +10,10 @@ import (
 
 // exportModCmd represents the export command
 var exportModCmd = &cobra.Command{
-	Use: "export [minecraft_version] [launcher] [mod]",
+	Use: "export [minecraft_version] [launcher]",
 	Aliases: []string{"ex"},
-	Short: "Export the modpack to a mrpack file (Modrinth) or zip file (CurseForge)",
+	Long:  "Export the current modpack into a .mrpack file for Modrinth or a .zip file for CurseForge",
+	Short: "Export the modpack to a .mrpack (Modrinth) or .zip (CurseForge)",
 	Args: cobra.ExactArgs(2),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]

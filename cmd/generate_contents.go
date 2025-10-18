@@ -12,7 +12,8 @@ import (
 var generateContentsCmd = &cobra.Command{
 	Use: "generate [minecraft_version] [launcher]",
 	Aliases: []string{"gen"},
-	Short: "Generate all modpack content into a PACK_CONTENT.md file",
+	Long:  "Generate all modpack content into modrinth_contents.md and curseforge_contents.md files",
+	Short: "Generate all modpack content into Markdown files",
 	Args: cobra.ExactArgs(2),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]

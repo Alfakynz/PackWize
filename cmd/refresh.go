@@ -12,7 +12,8 @@ import (
 var refreshModCmd = &cobra.Command{
 	Use: "refresh [minecraft_version] [launcher]",
 	Aliases: []string{"rf"},
-	Short: "Refresh packwiz files in the modpack",
+	Long:  "Refresh the index file for the specified Minecraft version and launcher",
+	Short: "Refresh the index file",
 	Args: cobra.ExactArgs(2),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]

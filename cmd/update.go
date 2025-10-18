@@ -14,7 +14,8 @@ var allFlag bool
 var updateModCmd = &cobra.Command{
 	Use: "update [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"upgrade", "u"},
-	Short: "Update a mod to the modpack",
+	Long:  "Update an external file (or all external files) in the modpack for the specified Minecraft version and launcher",
+	Short: "Update an external file (or all) in the modpack",
 	Args: cobra.MaximumNArgs(3),
 	Run: func(c *cobra.Command, args []string) {
 		var mod string

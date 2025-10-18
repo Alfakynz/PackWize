@@ -12,7 +12,8 @@ import (
 var unpinModCmd = &cobra.Command{
 	Use: "unpin [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"unhold", "unlock"},
-	Short: "Unpin a mod to the modpack",
+	Long:  "Unpin a file so it receives updates for the specified Minecraft version and launcher",
+	Short: "Unpin a file to allow updates",
 	Args: cobra.ExactArgs(3),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]

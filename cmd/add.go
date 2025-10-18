@@ -12,6 +12,7 @@ import (
 var addModCmd = &cobra.Command{
 	Use: "add [minecraft_version] [launcher] [mod]",
 	Aliases: []string{"install", "a", "i"},
+	Long:  "Add a project using a Modrinth or CurseForge URL, slug, project ID, or search term",
 	Short: "Add a mod to the modpack",
 	Args: cobra.ExactArgs(3),
 	Run: func(c *cobra.Command, args []string) {
