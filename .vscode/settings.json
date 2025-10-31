@@ -7,16 +7,9 @@
     "**/Thumbs.db": true,
     "/LICENSE": true,
     ".gitattributes": true,
-    "LICENSE": true,
     ".vscode": true,
-    "build": true,
     ".gitignore": true
   },
-  "hide-files.files": [
-    ".gitattributes",
-    "LICENSE",
-    ".vscode",
-    "build",
-    ".gitignore"
-  ]
+  "hide-files.files": [".gitattributes", ".vscode", ".gitignore"],
+  "makefile.configureOnOpen": false
 }
