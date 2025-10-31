@@ -120,8 +120,4 @@ If you'd like to contribute:
 
 ## To Do
 
-- Make a `dist` folder for exported files ✅
-- Make configurations dir for `packwize init` ✅
 - Documentation (website)
-- Add the --modrinth --curseforge options to add a mod from a diferent launcher ✅
-- Add the --output-dir and --name options to generate a diferent file in a diferent location

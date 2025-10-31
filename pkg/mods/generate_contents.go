@@ -13,7 +13,7 @@ import (
 )
 
 // GenerateContents generates a markdown file listing all mods, resource packs, and shader packs used in the modpack.
-func GenerateContents(minecraftVersionArg, launcherArg string) {
+func GenerateContents(minecraftVersionArg, launcherArg, outputDir, nameArg string) {
 	types := []struct {
 		Key   string
 		Label string
@@ -25,6 +25,10 @@ func GenerateContents(minecraftVersionArg, launcherArg string) {
 
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)
+
+	if outputDir == "" {
+		outputDir = "dist"
+	}
 
 	for _, minecraftVersion := range versions {
 		for _, launcher := range launchers {
@@ -44,15 +48,27 @@ func GenerateContents(minecraftVersionArg, launcherArg string) {
 			}
 
 			var fileName string
-			switch launcher {
-			case "Modrinth":
-				fileName = "modrinth_contents.md"
-			case "CurseForge":
-				fileName = "curseforge_contents.md"
-			default:
-				fileName = "contents.md"
+			if nameArg != "" {
+				fileName = nameArg
+			} else {
+				switch launcher {
+				case "Modrinth":
+					fileName = "modrinth_contents.md"
+				case "CurseForge":
+					fileName = "curseforge_contents.md"
+				default:
+					fileName = "contents.md"
+				}
 			}
-			outputPath := filepath.Join("dist", minecraftVersion, fileName)
+
+			outputPath := filepath.Join(outputDir, minecraftVersion)
+			err := os.MkdirAll(outputPath, 0755)
+			if err != nil {
+				log.Printf("Error creating directory %s: %v\n", outputPath, err)
+				continue
+			}
+			outputPath = filepath.Join(outputPath, fileName)
+
 			file, err := os.Create(outputPath)
 			if err != nil {
 				log.Printf("Error creating %s: %v\n", outputPath, err)
