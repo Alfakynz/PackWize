@@ -1,12 +1,5 @@
 # PackWize
 
-# ⚠️ This is the Go version of PackWize, some features are not available yet ⚠️
-
-The following features will be added in the future:
-
-- TUI
-- Easy updates
-
 ## 📜 Description
 
 This CLI/TUI was created to manage modpacks more easily than just using [Packwiz](https://packwiz.infra.link/). <br />
@@ -75,7 +68,7 @@ Modpack <br />
 ### 👤 For users
 
 ```sh
-go install github.com/Alfakynz/PackWize/cmd/packwize@go
+go install github.com/Alfakynz/PackWize/cmd/packwize@main
 ```
 
 ### 👨‍💻 For devs
@@ -120,7 +113,5 @@ If you'd like to contribute:
 
 ## To Do
 
-- Use Go instead of Python
-- Make a `dist` folder for exported files
-- Make configurations dir for `packwize init`
 - Documentation (website)
+- Create a TUI

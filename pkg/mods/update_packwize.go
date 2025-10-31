@@ -7,21 +7,10 @@ import (
 )
 
 // UpdatePackWize manages the PackWize upgrade process
-func UpdatePackWize(version string) {
-	if version == "" {
-		version = "latest"
-	}
+func UpdatePackWize() {
+	fmt.Println("Upgrading PackWize to version: main")
 
-	fmt.Println("Upgrading PackWize to version:", version)
-
-	var versionFlag string
-	if version != "latest" {
-		versionFlag = "@" + version
-	} else {
-		versionFlag = "@latest"
-	}
-
-	cmd := exec.Command("go", "install", "github.com/Alfakynz/PackWize/cmd/packwize"+versionFlag)
+	cmd := exec.Command("go", "install", "github.com/Alfakynz/PackWize/cmd/packwize@main")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 

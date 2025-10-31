@@ -10,21 +10,14 @@ import (
 
 // updatePackWizeCmd is the command to update PackWize to the latest version
 var updatePackWizeCmd = &cobra.Command{
-	Use: "update-packwize [version]",
+	Use:   "update-packwize",
 	Aliases: []string{"upgrade-packwize", "up"},
 	Long:  "Upgrade PackWize to the latest available version",
 	Short: "Upgrade PackWize to the latest version",
-	Args: cobra.MaximumNArgs(1),
+	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		var version string
-		if len(args) == 0 {
-			version = "latest"
-		} else {
-			version = args[0]
-		}
-
-		mods.UpdatePackWize(version)
-},
+		mods.UpdatePackWize()
+	},
 }
 
 func init() {
