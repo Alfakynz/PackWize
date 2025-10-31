@@ -11,7 +11,7 @@ import (
 )
 
 // AddMod manages adding a mod for multiple versions and launchers
-func AddMod(minecraftVersionArg, launcherArg, mod string) {
+func AddMod(minecraftVersionArg, launcherArg, mod string, forceModrinth, forceCurseforge bool) {
 	// Convert arguments
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)
@@ -26,7 +26,15 @@ func AddMod(minecraftVersionArg, launcherArg, mod string) {
 		for _, l := range launchers {
 			fmt.Printf("Adding %s to %s/%s ...\n", mod, v, l)
 
-			cmd := exec.Command("packwiz", strings.ToLower(l), "add", mod)
+			var cmd *exec.Cmd
+			if forceModrinth {
+				cmd = exec.Command("packwiz", "mr", "add", mod)
+			} else if forceCurseforge {
+				cmd = exec.Command("packwiz", "cf", "add", mod)
+			} else {
+				cmd = exec.Command("packwiz", strings.ToLower(l), "add", mod)
+			}
+
 			cmd.Dir = fmt.Sprintf("%s/%s", v, l)
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr

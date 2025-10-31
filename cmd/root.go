@@ -29,15 +29,14 @@ import (
 	"github.com/spf13/viper"
 )
 
-const VERSION = "v2.0.0-a"
+const VERSION = "v2.0.0-b"
 var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "packwize",
 	Short: "A CLI to manage modpack easier than just using Packwiz. Based on Packwiz",
-	Long: `
-	This CLI/TUI was created to manage modpacks more easily than just using [Packwiz](https://packwiz.infra.link/).
+	Long: `This CLI/TUI was created to manage modpacks more easily than just using [Packwiz](https://packwiz.infra.link/).
 	Run Packwiz commands across multiple directories at the same time.
 	Easily create modpacks by placing you config file into a configuration directory, it will be copied into your modpack directory when exporting it.
 	Made for creators who maintain multiple versions of a modpack.`,
