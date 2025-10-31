@@ -120,4 +120,7 @@ If you'd like to contribute:
 
 ## To Do
 
+- Use Go instead of Python
+- Make a `dist` folder for exported files
+- Make configurations dir for `packwize init`
 - Documentation (website)
