@@ -46,8 +46,8 @@ func ExportMod(minecraftVersionArg, launcherArg string) {
 
 			outputDir := fmt.Sprintf("dist/%s", v)
 			if err := os.MkdirAll(outputDir, 0755); err != nil {
-    			log.Printf("Error creating output directory %s: %v\n", outputDir, err)
-    			continue
+				log.Printf("Error creating output directory %s: %v\n", outputDir, err)
+				continue
 			}
 
 			// Search for .mrpack or .zip files (no subfolders)
@@ -59,18 +59,18 @@ func ExportMod(minecraftVersionArg, launcherArg string) {
 			exportedFiles := append(filesMrpack, filesZip...)
 
 			if len(exportedFiles) == 0 {
-			    fmt.Printf("No exported .mrpack or .zip file found in %s/%s\n", v, l)
-			    continue
+				fmt.Printf("No exported .mrpack or .zip file found in %s/%s\n", v, l)
+				continue
 			}
 
 			// Move each found file
 			for _, f := range exportedFiles {
-			    dst := filepath.Join(outputDir, filepath.Base(f))
-			    if err := os.Rename(f, dst); err != nil {
-        			log.Printf("Error moving %s to %s: %v\n", f, dst, err)
-        			continue
-			    }
-			    fmt.Printf("Moved %s --> %s\n", f, dst)
+				dst := filepath.Join(outputDir, filepath.Base(f))
+				if err := os.Rename(f, dst); err != nil {
+					log.Printf("Error moving %s to %s: %v\n", f, dst, err)
+					continue
+				}
+				fmt.Printf("Moved %s --> %s\n", f, dst)
 			}
 		}
 	}
