@@ -10,8 +10,8 @@ import (
 	"github.com/Alfakynz/PackWize/pkg/utils"
 )
 
-// AddMod manages adding a mod for multiple versions and launchers
-func AddMod(minecraftVersionArg, launcherArg, mod string, forceModrinth, forceCurseforge bool) {
+// AddMod manages adding one or multiple mods for multiple versions and launchers
+func AddMod(minecraftVersionArg, launcherArg, modsArg string, forceModrinth, forceCurseforge bool) {
 	// Convert arguments
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)
@@ -21,27 +21,40 @@ func AddMod(minecraftVersionArg, launcherArg, mod string, forceModrinth, forceCu
 		return
 	}
 
-	// Loop over all combinations
-	for _, v := range versions {
-		for _, l := range launchers {
-			fmt.Printf("Adding %s to %s/%s ...\n", mod, v, l)
+	// Split mods by comma and trim spaces
+	mods := strings.Split(modsArg, ",")
+	for i, m := range mods {
+		mods[i] = strings.TrimSpace(m)
+	}
 
-			var cmd *exec.Cmd
-			if forceModrinth {
-				cmd = exec.Command("packwiz", "mr", "add", mod)
-			} else if forceCurseforge {
-				cmd = exec.Command("packwiz", "cf", "add", mod)
-			} else {
-				cmd = exec.Command("packwiz", strings.ToLower(l), "add", mod)
-			}
+	// Loop over all mods
+	for _, mod := range mods {
+		if mod == "" {
+			continue
+		}
 
-			cmd.Dir = fmt.Sprintf("%s/%s", v, l)
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
-			cmd.Stdin = os.Stdin
+		// Loop over all combinations of version/launcher
+		for _, v := range versions {
+			for _, l := range launchers {
+				fmt.Printf("Adding %s to %s/%s ...\n", mod, v, l)
 
-			if err := cmd.Run(); err != nil {
-				log.Printf("Error adding %s to %s/%s: %v\n", mod, v, l, err)
+				var cmd *exec.Cmd
+				if forceModrinth {
+					cmd = exec.Command("packwiz", "mr", "add", mod)
+				} else if forceCurseforge {
+					cmd = exec.Command("packwiz", "cf", "add", mod)
+				} else {
+					cmd = exec.Command("packwiz", strings.ToLower(l), "add", mod)
+				}
+
+				cmd.Dir = fmt.Sprintf("%s/%s", v, l)
+				cmd.Stdout = os.Stdout
+				cmd.Stderr = os.Stderr
+				cmd.Stdin = os.Stdin
+
+				if err := cmd.Run(); err != nil {
+					log.Printf("Error adding %s to %s/%s: %v\n", mod, v, l, err)
+				}
 			}
 		}
 	}
