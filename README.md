@@ -113,7 +113,6 @@ If you'd like to contribute:
 
 ## To Do
 
-- Create multiple Minecraft instances with the init command
 - Place a configurations directory at the root for all versions, and keep version-specific configuration directories if needed
 - Documentation (website)
 - Create a TUI
