@@ -13,6 +13,11 @@ import (
 
 // Init creates the directory structure for the modpack version and launchers,
 func Init(modpackNameArg, authorArg, versionArg, minecraftVersionArg, modloaderArg, modloaderVersionArg, launcherArg string) {
+	// Create root-level configurations directory and config subdirectory
+	if err := os.MkdirAll("configurations/config", os.ModePerm); err != nil {
+		log.Fatalf("Failed to create root configurations directory: %v", err)
+	}
+
 	// Normalize inputs for case-insensitive comparison
 	modloaderLower := strings.ToLower(modloaderArg)
 	modloaderVersionLower := strings.ToLower(modloaderVersionArg)
@@ -46,14 +51,9 @@ func Init(modpackNameArg, authorArg, versionArg, minecraftVersionArg, modloaderA
 		}
 
 		// Create base configurations diectory
-		configurationsDir := fmt.Sprintf("%s/configurations", baseVersionDir)
-		if err := os.MkdirAll(configurationsDir, os.ModePerm); err != nil {
-			log.Fatalf("Failed to create configurations directory %s: %v", configurationsDir, err)
-		}
-
-		configsDir := fmt.Sprintf("%s/config", configurationsDir)
-		if err := os.MkdirAll(configsDir, os.ModePerm); err != nil {
-			log.Fatalf("Failed to create config directory %s: %v", configsDir, err)
+		// Create configurations and config subdirectory in one call
+		if err := os.MkdirAll(fmt.Sprintf("%s/configurations/config", baseVersionDir), os.ModePerm); err != nil {
+			log.Fatalf("Failed to create configurations/config directory for %s: %v", baseVersionDir, err)
 		}
 
 		// Loop through launchers (e.g., Modrinth, CurseForge)

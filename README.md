@@ -22,7 +22,7 @@ Run packwiz commands for all Minecraft versions and launchers you want at the sa
 - Update the modpack version (not the minecraft version)
 - Refresh the pack.toml and index.toml files
 - Migrate Minecraft/lodaer version to another
-- Initialize a new modpack and create directories
+- Initialize a new modpack and create the `configurations` directories
 
 All of these functions can be run for one Minecraft version in one launcher or for all Minecraft versions in all launchers.
 
@@ -30,29 +30,28 @@ All of these functions can be run for one Minecraft version in one launcher or f
 
 Modpack <br />
 ┣ 1.21.1 <br />
+┃ ┣ configurations <br />
+┃ ┃ ┣ config <br />
+┃ ┃ ┗ ┗ sodium-options.json <br />
 ┃ ┣ CurseForge <br />
 ┃ ┃ ┣ mods <br />
 ┃ ┃ ┃ ┣ fabric-api.pw.toml <br />
-┃ ┃ ┃ ┣ modmenu.pw.toml <br />
-┃ ┃ ┃ ┣ sodium.pw.toml <br />
-┃ ┃ ┃ ┗ text-placeholder-api.pw.toml <br />
+┃ ┃ ┃ ┗ sodium.pw.toml <br />
 ┃ ┃ ┣ index.toml <br />
 ┃ ┃ ┗ pack.toml <br />
 ┃ ┣ Modrinth <br />
 ┃ ┃ ┣ mods <br />
 ┃ ┃ ┃ ┣ fabric-api.pw.toml <br />
-┃ ┃ ┃ ┣ modmenu.pw.toml <br />
-┃ ┃ ┃ ┣ placeholder-api.pw.toml <br />
 ┃ ┃ ┃ ┗ sodium.pw.toml <br />
 ┃ ┃ ┣ index.toml <br />
 ┃ ┃ ┗ pack.toml <br />
-┃ ┣ configurations <br />
-┃ ┃ ┣ config <br />
-┃ ┃ ┃ ┗ sodium-options.json <br />
-┃ ┃ ┣ .packwizignore <br />
-┃ ┃ ┣ icon.png <br />
-┃ ┃ ┗ options.txt <br />
 ┃ ┗ PACK_CONTENT.md <br />
+┣ configurations <br />
+┃ ┣ config <br />
+┃ ┃ ┗ sodium-options.json <br />
+┃ ┣ .packwizignore <br />
+┃ ┣ icon.png <br />
+┃ ┗ options.txt <br />
 ┣ dist <br />
 ┃ ┣ 1.21.1 <br />
 ┃ ┃ ┣ Modpack-1.0.0.mrpack <br />
@@ -61,7 +60,7 @@ Modpack <br />
 ## ⚙️ Requirements
 
 - [Packwiz](https://packwiz.infra.link/)
-- [Go 1.21.5 (or higher)](https://go.dev/)
+- [Go 1.25.1 (or higher)](https://go.dev/)
 
 ## 📦 Installation
 
