@@ -112,6 +112,5 @@ If you'd like to contribute:
 
 ## To Do
 
-- Place a configurations directory at the root for all versions, and keep version-specific configuration directories if needed
 - Documentation (website)
 - Create a TUI

@@ -13,7 +13,7 @@ func ConvertArguments(argument, value string) []string {
 	switch argument {
 	case "minecraft_versions":
 		switch strings.ToLower(value) {
-		case "all":
+		case "all", "a":
 			dirs := []string{}
 
 			entries, err := os.ReadDir(".")
@@ -35,7 +35,7 @@ func ConvertArguments(argument, value string) []string {
 
 	case "launchers":
 		switch strings.ToLower(value) {
-		case "all":
+		case "all", "a":
 			return []string{"CurseForge", "Modrinth"}
 		case "modrinth", "mr":
 			return []string{"Modrinth"}
@@ -44,6 +44,8 @@ func ConvertArguments(argument, value string) []string {
 		}
 	
 	case "minecraft_versions_init":
+	value = strings.ToLower(value)
+
 	// Build a flat ordered list of all known subversions from the minecraftVersions map
 	majors := make([]string, 0, len(minecraftVersions))
 	for m := range minecraftVersions {
