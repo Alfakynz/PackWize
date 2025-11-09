@@ -29,10 +29,11 @@ func Init(modpackNameArg, authorArg, versionArg, minecraftVersionArg, modloaderA
 		return
 	}
 
-	// Split minecraftVersionArg by commas and trim spaces
-	mcVersions := strings.Split(minecraftVersionArg, ",")
-	for i := range mcVersions {
-		mcVersions[i] = strings.TrimSpace(mcVersions[i])
+	// Parse minecraft version argument
+	mcVersions := utils.ConvertArguments("minecraft_versions_init", minecraftVersionArg)
+	if mcVersions == nil {
+		log.Printf("Invalid Argument: %s\n", minecraftVersionArg)
+		return
 	}
 
 	for _, mcVersion := range mcVersions {
