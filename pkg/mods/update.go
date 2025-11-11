@@ -10,29 +10,37 @@ import (
 )
 
 // UpdateMod manages updating a mod for multiple versions and launchers
-func UpdateMod(minecraftVersionArg, launcherArg, mod string) {
+func UpdateMod(minecraftVersionArg, launcherArg, modsArg string) {
 	// Convert arguments
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)
+	mods := utils.ConvertArguments("mods", modsArg)
 
-	if versions == nil || launchers == nil {
-		log.Printf("Invalid Arguments: %s / %s\n", minecraftVersionArg, launcherArg)
+	if versions == nil || launchers == nil || mods == nil {
+		log.Printf("Invalid Arguments: %s / %s / %s\n", minecraftVersionArg, launcherArg, modsArg)
 		return
 	}
 
-	// Loop over all combinations
-	for _, v := range versions {
-		for _, l := range launchers {
-			fmt.Printf("Updating %s to %s/%s ...\n", mod, v, l)
+	// Loop over all mods
+	for _, mod := range mods {
+		if mod == "" {
+			continue
+		}
 
-			cmd := exec.Command("packwiz", "update", mod)
-			cmd.Dir = fmt.Sprintf("%s/%s", v, l)
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
-			cmd.Stdin = os.Stdin
+		// Loop over all combinations
+		for _, v := range versions {
+			for _, l := range launchers {
+				fmt.Printf("Updating %s to %s/%s ...\n", mod, v, l)
 
-			if err := cmd.Run(); err != nil {
-				log.Printf("Error updating %s to %s/%s: %v\n", mod, v, l, err)
+				cmd := exec.Command("packwiz", "update", mod)
+				cmd.Dir = fmt.Sprintf("%s/%s", v, l)
+				cmd.Stdout = os.Stdout
+				cmd.Stderr = os.Stderr
+				cmd.Stdin = os.Stdin
+
+				if err := cmd.Run(); err != nil {
+					log.Printf("Error updating %s to %s/%s: %v\n", mod, v, l, err)
+				}
 			}
 		}
 	}

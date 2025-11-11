@@ -15,16 +15,11 @@ func AddMod(minecraftVersionArg, launcherArg, modsArg string, forceModrinth, for
 	// Convert arguments
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)
+	mods := utils.ConvertArguments("mods", modsArg)
 
-	if versions == nil || launchers == nil {
-		log.Printf("Invalid Arguments: %s / %s\n", minecraftVersionArg, launcherArg)
+	if versions == nil || launchers == nil || mods == nil {
+		log.Printf("Invalid Arguments: %s / %s / %s\n", minecraftVersionArg, launcherArg, modsArg)
 		return
-	}
-
-	// Split mods by comma and trim spaces
-	mods := strings.Split(modsArg, ",")
-	for i, m := range mods {
-		mods[i] = strings.TrimSpace(m)
 	}
 
 	// Loop over all mods
