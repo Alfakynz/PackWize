@@ -10,7 +10,7 @@ import (
 )
 
 // RefreshMod manages refreshing packwiz files for multiple versions and launchers
-func RefreshMod(minecraftVersionArg string, launcherArg string) {
+func RefreshMod(minecraftVersionArg, launcherArg string, quiet bool) {
 	// Convert arguments
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)
@@ -23,12 +23,15 @@ func RefreshMod(minecraftVersionArg string, launcherArg string) {
 	// Loop over all combinations
 	for _, v := range versions {
 		for _, l := range launchers {
-			fmt.Printf("Refreshing packwiz files in %s/%s ...\n", v, l)
-
+			if !quiet {
+				fmt.Printf("Refreshing packwiz files in %s/%s ...\n", v, l)
+			}
 			cmd := exec.Command("packwiz", "refresh")
 			cmd.Dir = fmt.Sprintf("%s/%s", v, l)
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
+			if !quiet {
+				cmd.Stdout = os.Stdout
+				cmd.Stderr = os.Stderr
+			}
 
 			if err := cmd.Run(); err != nil {
 				log.Printf("Error refreshing packwiz files in %s/%s: %v\n", v, l, err)

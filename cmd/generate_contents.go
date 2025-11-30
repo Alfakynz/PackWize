@@ -22,13 +22,17 @@ var generateContentsCmd = &cobra.Command{
 		mcVersion := args[0]
 		launcher := args[1]
 
-		mods.GenerateContents(mcVersion, launcher, outputDir, name)
+		quietFlag, _ := c.Flags().GetBool("quiet")
+
+		mods.GenerateContents(mcVersion, launcher, outputDir, name, quietFlag)
 	},
 }
 
 func init() {
 	generateContentsCmd.Flags().StringVarP(&outputDir, "output-dir", "o", "", "Output directory")
 	generateContentsCmd.Flags().StringVarP(&name, "name", "n", "", "Base name for output files")
+
+	generateContentsCmd.Flags().Bool("quiet", false, "Suppress output messages")
 	
 	rootCmd.AddCommand(generateContentsCmd)
 }

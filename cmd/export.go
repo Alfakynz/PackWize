@@ -14,15 +14,19 @@ var exportModCmd = &cobra.Command{
 	Aliases: []string{"ex"},
 	Long:  "Export the current modpack into a .mrpack file for Modrinth or a .zip file for CurseForge",
 	Short: "Export the modpack to a .mrpack (Modrinth) or .zip (CurseForge)",
-	Args: cobra.ExactArgs(2),
+	Args: cobra.MinimumNArgs(2),
 	Run: func(c *cobra.Command, args []string) {
 		mcVersion := args[0]
 		launcher := args[1]
 
-		mods.ExportMod(mcVersion, launcher)
+		quietFlag, _ := c.Flags().GetBool("quiet")
+
+		mods.ExportMod(mcVersion, launcher, quietFlag)
 },
 }
 
 func init() {
+	exportModCmd.Flags().Bool("quiet", false, "Suppress output messages")
+
 	rootCmd.AddCommand(exportModCmd)
 }

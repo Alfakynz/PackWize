@@ -10,15 +10,17 @@ import (
 
 // CopyConfigurations copies everything from the root configurations directory
 // and then from {version}/configurations/ into {version}/{launcher}/
-func CopyConfigurations(version string, launcher string) error {
+func CopyConfigurations(version, launcher string, quiet bool) error {
 	rootDir := "configurations"
 	dstDir := filepath.Join(version, launcher)
 
 	// Check if the root configurations directory exists
 	info, err := os.Stat(rootDir)
 	if err == nil && info.IsDir() {
-		fmt.Printf("Copying base configurations from %s to %s...\n", rootDir, dstDir)
-		if err := copyAndOverride(rootDir, dstDir); err != nil {
+		if !quiet {
+			fmt.Printf("Copying base configurations from %s to %s...\n", rootDir, dstDir)
+		}
+		if err := copyAndOverride(rootDir, dstDir, quiet); err != nil {
 			return err
 		}
 	} else {
@@ -33,7 +35,9 @@ func CopyConfigurations(version string, launcher string) error {
 		return nil
 	}
 
-	fmt.Printf("Copying version-specific configurations from %s to %s...\n", srcDir, dstDir)
+	if !quiet {
+		fmt.Printf("Copying version-specific configurations from %s to %s...\n", srcDir, dstDir)
+	}
 
 	// Recursive traversal of the version-specific source folder
 	return filepath.Walk(srcDir, func(path string, info os.FileInfo, err error) error {
@@ -62,13 +66,15 @@ func CopyConfigurations(version string, launcher string) error {
 		if err := copyFile(path, targetPath); err != nil {
 			return err
 		}
-		fmt.Printf("Overridden by version-specific: %s --> %s\n", path, targetPath)
+		if !quiet {
+			fmt.Printf("Overridden by version-specific: %s --> %s\n", path, targetPath)
+		}
 		return nil
 	})
 }
 
 // copyAndOverride copies files from srcDir to dstDir only if they don’t exist in dstDir or differ by content
-func copyAndOverride(srcDir, dstDir string) error {
+func copyAndOverride(srcDir, dstDir string, quiet bool) error {
 	return filepath.Walk(srcDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -106,7 +112,9 @@ func copyAndOverride(srcDir, dstDir string) error {
 		if err := copyFile(path, targetPath); err != nil {
 			return err
 		}
-		fmt.Printf("Copied base configuration: %s --> %s\n", path, targetPath)
+		if !quiet {
+			fmt.Printf("Copied base configuration: %s --> %s\n", path, targetPath)
+		}
 		return nil
 	})
 }

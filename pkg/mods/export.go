@@ -12,7 +12,7 @@ import (
 )
 
 // ExportMod manages exporting the modpack for multiple versions and launchers
-func ExportMod(minecraftVersionArg, launcherArg string) {
+func ExportMod(minecraftVersionArg, launcherArg string, quiet bool) {
 	// Convert arguments
 	versions := utils.ConvertArguments("minecraft_versions", minecraftVersionArg)
 	launchers := utils.ConvertArguments("launchers", launcherArg)
@@ -26,18 +26,23 @@ func ExportMod(minecraftVersionArg, launcherArg string) {
 	for _, v := range versions {
 		for _, l := range launchers {
 			// Copy configurations
-			if err := utils.CopyConfigurations(v, l); err != nil {
+			if err := utils.CopyConfigurations(v, l, quiet); err != nil {
 				log.Printf("Error copying configurations from %s/configurations to %s/%s: %v\n", v, v, l, err)
 				continue
 			}
 
 			// Export the modpack using packwiz
-			fmt.Printf("Exporting the modpack to %s/%s ...\n", v, l)
+			if !quiet {
+				fmt.Printf("Exporting the modpack to %s/%s ...\n", v, l)
+			}
 
 			cmd := exec.Command("packwiz", strings.ToLower(l), "export")
 			cmd.Dir = fmt.Sprintf("%s/%s", v, l)
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
+
+			if !quiet {
+			    cmd.Stdout = os.Stdout
+    			cmd.Stderr = os.Stderr
+			}
 
 			if err := cmd.Run(); err != nil {
 				log.Printf("Error exporting the modpack to %s/%s: %v\n", v, l, err)
@@ -77,7 +82,9 @@ func ExportMod(minecraftVersionArg, launcherArg string) {
 					log.Printf("Error moving %s to %s: %v\n", f, dst, err)
 					continue
 				}
-				fmt.Printf("Moved %s --> %s\n", f, dst)
+				if !quiet {
+					fmt.Printf("Moved %s --> %s\n", f, dst)
+				}
 			}
 		}
 	}
