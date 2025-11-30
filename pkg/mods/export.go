@@ -65,7 +65,14 @@ func ExportMod(minecraftVersionArg, launcherArg string) {
 
 			// Move each found file
 			for _, f := range exportedFiles {
-				dst := filepath.Join(outputDir, filepath.Base(f))
+				originalName := filepath.Base(f)
+				ext := filepath.Ext(originalName)
+				nameWithoutExt := strings.TrimSuffix(originalName, ext)
+
+				// new filename with minecraft version suffix
+				newFileName := fmt.Sprintf("%s-%s%s", nameWithoutExt, v, ext)
+				dst := filepath.Join(outputDir, newFileName)
+
 				if err := os.Rename(f, dst); err != nil {
 					log.Printf("Error moving %s to %s: %v\n", f, dst, err)
 					continue
